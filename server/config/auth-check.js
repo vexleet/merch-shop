@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
     }
 
     const userId = decoded.sub;
+
     User
       .findById(userId)
       .then(user => {
