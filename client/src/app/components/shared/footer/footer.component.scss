@@ -1,0 +1,27 @@
+footer{
+    background: #08105B;
+    color: #16DB94;
+    padding: 2em 0;
+
+    .footer-wrapper{
+        width: 75%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        
+        ul{
+            padding: 0;
+            li{
+                list-style-type: none;
+
+                &:not(:first-child){
+                    padding: 0.5em 0.8em;
+                }
+            }
+
+            // &.social-media{
+            //     margin-left: auto;
+            // }
+        }
+    }
+}
