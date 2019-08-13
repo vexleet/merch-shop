@@ -8,7 +8,6 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
-  console.log(email)
   const user = {
     email: email.trim(),
     password: password.trim(),
@@ -16,7 +15,7 @@ module.exports = new PassportLocalStrategy({
   }
 
   User
-    .find({email: email})
+    .find({ email: email })
     .then(users => {
       if (users.length > 0) {
         return done('E-mail already exists!')

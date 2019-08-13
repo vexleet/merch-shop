@@ -16,4 +16,35 @@ export class AuthService {
   login(body: Object) {
     return this.http.post(`${this.baseUrl}/login`, body);
   }
+
+  logout() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+
+    return true;
+  }
+
+  isAuthenticated() {
+    return this.getCookie('token') === null;
+  }
+
+  getCookie(key: string) {
+    const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+  }
+
+  saveUserInfo(res: Object) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+
+    document.cookie = `token = ${res['token']};expires=${expires.toUTCString}`;
+    document.cookie = `isAdmin = ${res['user']['roles'].length === 1};expires=${expires.toUTCString}`;
+    document.cookie = `username = ${res['user']['username']};expires=${expires.toUTCString}`;
+  }
 }

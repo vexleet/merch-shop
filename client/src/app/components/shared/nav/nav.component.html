@@ -7,8 +7,9 @@
                 <li routerLink="/home">Home</li>
                 <li>Shop</li>
                 <li>Contact us</li>
-                <li routerLink="/login">Login</li>
-                <li routerLink="/register">Register</li>
+                <li routerLink="/login" *ngIf="isAuthenticated">Login</li>
+                <li routerLink="/register" *ngIf="isAuthenticated">Register</li>
+                <li routerLink="/register" *ngIf="!isAuthenticated" (click)="logout()">Logout</li>
             </ul>
         </nav>
     </div>
