@@ -34,6 +34,15 @@ export class AuthService {
     return this.getCookie('token') === null;
   }
 
+  isAdmin() {
+    return this.getCookie('isAdmin') === 'true';
+  }
+
+  get token() {
+    return this.getCookie('token');
+  }
+
+
   getCookie(key: string) {
     const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
     return keyValue ? keyValue[2] : null;

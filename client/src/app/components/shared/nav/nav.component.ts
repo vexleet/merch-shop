@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -9,19 +9,22 @@ import { of } from 'rxjs';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, DoCheck {
-  // isAdmin: boolean;
+  isAdmin: boolean;
   isAuthenticated: boolean;
 
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router) {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.isAdmin = this.authService.isAdmin();
+  }
 
   ngOnInit() {
   }
 
   ngDoCheck() {
     this.isAuthenticated = this.authService.isAuthenticated();
-    // this.isAdmin = this.authService.isAdmin();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   logout() {
