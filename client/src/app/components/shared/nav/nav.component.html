@@ -8,8 +8,7 @@
                 <li>Shop</li>
                 <li>Contact us</li>
                 <li routerLink="/add-merch" *ngIf="isAdmin && !isAuthenticated">Add merch</li>
-                <li routerLink="/login" *ngIf="isAuthenticated">Login</li>
-                <li routerLink="/register" *ngIf="isAuthenticated">Register</li>
+                <li routerLink="/login" *ngIf="isAuthenticated">Account</li>
                 <li routerLink="/register" *ngIf="!isAuthenticated" (click)="logout()">Logout</li>
             </ul>
         </nav>

@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         console.log(res);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       });
   }
 
