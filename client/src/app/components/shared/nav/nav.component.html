@@ -5,7 +5,7 @@
         <nav>
             <ul>
                 <li routerLink="/home">Home</li>
-                <li>Shop</li>
+                <li routerLink="/shop">Shop</li>
                 <li>Contact us</li>
                 <li routerLink="/add-merch" *ngIf="isAdmin && !isAuthenticated">Add merch</li>
                 <li routerLink="/login" *ngIf="isAuthenticated">Account</li>

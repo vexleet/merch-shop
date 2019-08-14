@@ -5,6 +5,7 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { CreateMerchComponent } from './components/merch/create-merch/create-merch.component';
 import { FetchAllMerchResolver } from './core/resolvers/fetch-all-merch.resolver';
+import { MerchShopComponent } from './components/merch/merch-shop/merch-shop.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,13 @@ const routes: Routes = [
   {
     path: 'add-merch',
     component: CreateMerchComponent,
+  },
+  {
+    path: 'shop',
+    component: MerchShopComponent,
+    resolve: {
+      merch: FetchAllMerchResolver,
+    }
   }
 ];
 

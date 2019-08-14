@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/authentication/register/register
 import { LoginComponent } from './components/authentication/login/login.component';
 import { CreateMerchComponent } from './components/merch/create-merch/create-merch.component';
 import { MerchListComponent } from './components/merch/merch-list/merch-list.component';
+import { MerchShopComponent } from './components/merch/merch-shop/merch-shop.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MerchListComponent } from './components/merch/merch-list/merch-list.com
     RegisterComponent,
     LoginComponent,
     CreateMerchComponent,
-    MerchListComponent
+    MerchListComponent,
+    MerchShopComponent
   ],
   imports: [
     BrowserModule,
