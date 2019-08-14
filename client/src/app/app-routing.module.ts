@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { CreateMerchComponent } from './components/merch/create-merch/create-merch.component';
+import { FetchAllMerchResolver } from './core/resolvers/fetch-all-merch.resolver';
 
 
 const routes: Routes = [
@@ -14,7 +15,10 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    resolve: {
+      merch: FetchAllMerchResolver,
+    }
   },
   {
     path: 'login',

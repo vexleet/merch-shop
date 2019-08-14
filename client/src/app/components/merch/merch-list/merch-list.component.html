@@ -1,0 +1,11 @@
+<ul>
+    <li *ngFor="let item of merch">
+        <img src="{{item.imagesOfMerch[0]}}" alt="">
+
+        <h6>{{item.merchName | uppercase}}</h6>
+
+        <p>${{item.price}}</p>
+
+        <a>View</a>
+    </li>
+</ul>

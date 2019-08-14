@@ -12,6 +12,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { CreateMerchComponent } from './components/merch/create-merch/create-merch.component';
+import { MerchListComponent } from './components/merch/merch-list/merch-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CreateMerchComponent } from './components/merch/create-merch/create-mer
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    CreateMerchComponent
+    CreateMerchComponent,
+    MerchListComponent
   ],
   imports: [
     BrowserModule,

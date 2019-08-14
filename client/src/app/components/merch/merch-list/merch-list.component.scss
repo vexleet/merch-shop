@@ -1,0 +1,52 @@
+ul{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 1em;
+    justify-items: center;
+    margin: 2em 0;
+    padding: 0;
+
+    li{
+        list-style-type: none;
+        width: 200px;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+
+        img{
+            width: 100%;
+        }
+
+        a{
+            background: #0D19A3;
+            padding: 0.5em 0;
+            width: 20px;
+            width: 100px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100px;
+            margin: 0 auto;
+            cursor: pointer;
+            display: none;
+        }
+
+        &:hover{
+            background: rgb(238, 238, 238);
+            a{
+                display: block;
+                animation: test 0.3s;
+                animation-direction: alternate;
+            }
+        }
+    }
+}
+
+@keyframes test{
+    from{
+        top: 140px;
+    }
+    to{
+        top: 100px;
+    }
+}

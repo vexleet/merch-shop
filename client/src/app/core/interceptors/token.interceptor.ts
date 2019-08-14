@@ -17,14 +17,13 @@ export class TokenInterceptor implements HttpInterceptor {
         private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.endsWith('/add-merch')) {
-            const token = this.authService.token;
-            req = req.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-        }
+        const token = this.authService.token;
+        req = req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
 
         return next.handle(req)
             .pipe(catchError((err: HttpErrorResponse) => {
