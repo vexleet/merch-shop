@@ -1,0 +1,34 @@
+<section>
+    <div class="image">
+        <img src="{{merch.imagesOfMerch[0]}}" alt="">
+    </div>
+
+    <div class="details">
+        <h1>{{merch.merchName | uppercase}}</h1>
+
+        <h5>${{merch.price}}</h5>
+
+        <form (ngSubmit)="addToCart()" [formGroup]="productForm">
+            <div>
+                <label for="color">Color</label>
+                <select formControlName="color" id="color">
+                    <option *ngFor="let color of merch.colors" value="{{color}}">{{color | uppercase}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="size">Size</label>
+                <select formControlName="size" id="size">
+                    <option *ngFor="let size of merch.sizes" value="{{size}}">{{size | uppercase}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="quantity">Quantity</label>
+                <input type="number" formControlName="quantity" id="quantity">
+            </div>
+
+            <button type="submit">ADD TO CART</button>
+        </form>
+    </div>
+</section>

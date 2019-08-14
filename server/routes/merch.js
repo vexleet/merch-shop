@@ -48,4 +48,18 @@ router.get('/all-merch', (req, res) => {
         })
 });
 
+router.get('/all-merch/:name', (req, res) => {
+    const name = req.params.name.replace(/-/g, ' ');
+
+    Merch.findOne({
+        merchName: name
+    })
+        .then((data) => {
+            return res.status(200).json({
+                success: true,
+                data: data,
+            });
+        });
+});
+
 module.exports = router;

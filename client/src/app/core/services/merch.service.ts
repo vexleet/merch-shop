@@ -17,4 +17,8 @@ export class MerchService {
   getAllMerch() {
     return this.http.get<IMerch[]>(`${this.baseUrl}/all-merch`);
   }
+
+  getDetailsOfMerch(nameOfMerch) {
+    return this.http.get<IMerch>(`${this.baseUrl}/all-merch/${nameOfMerch}`);
+  }
 }
