@@ -16,6 +16,7 @@ import { MerchListComponent } from './components/merch/merch-list/merch-list.com
 import { MerchShopComponent } from './components/merch/merch-shop/merch-shop.component';
 import { MerchDetailsComponent } from './components/merch/merch-details/merch-details.component';
 import { ReplaceSpaces } from './core/pipes/replace-spaces.pipe';
+import { MerchModule } from './components/merch/merch.module';
 
 @NgModule({
   declarations: [
@@ -25,17 +26,13 @@ import { ReplaceSpaces } from './core/pipes/replace-spaces.pipe';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    CreateMerchComponent,
-    MerchListComponent,
-    MerchShopComponent,
-    MerchDetailsComponent,
-    ReplaceSpaces,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MerchModule,
   ],
   providers: [
     {

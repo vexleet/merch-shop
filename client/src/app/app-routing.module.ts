@@ -32,22 +32,8 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'add-merch',
-    component: CreateMerchComponent,
-  },
-  {
-    path: 'shop',
-    component: MerchShopComponent,
-    resolve: {
-      merch: FetchAllMerchResolver,
-    }
-  },
-  {
-    path: 'shop/:name',
-    component: MerchDetailsComponent,
-    resolve: {
-      merchDetails: FetchMerchDetailsResolver,
-    }
+    path: 'collections',
+    loadChildren: './components/merch/merch.module#MerchModule',
   }
 ];
 
