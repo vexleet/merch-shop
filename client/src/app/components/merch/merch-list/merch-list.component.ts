@@ -11,7 +11,7 @@ export class MerchListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
+
 
 }

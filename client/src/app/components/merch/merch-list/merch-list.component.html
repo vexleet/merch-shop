@@ -1,5 +1,5 @@
-<ul>
-    <li *ngFor="let item of merch">
+<ul id="view-element">
+    <li *ngFor="let item of merch" class="view-element">
         <img src="{{item.imagesOfMerch[0]}}" alt="">
 
         <h6>{{item.merchName | uppercase}}</h6>

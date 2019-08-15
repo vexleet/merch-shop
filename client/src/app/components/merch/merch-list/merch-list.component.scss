@@ -20,33 +20,24 @@ ul{
         a{
             background: #0D19A3;
             padding: 0.5em 0;
-            width: 20px;
             width: 100px;
             position: absolute;
             left: 0;
             right: 0;
-            top: 100px;
+            top: 140px;
             margin: 0 auto;
             cursor: pointer;
-            display: none;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
         }
 
         &:hover{
             background: rgb(238, 238, 238);
-            a{
-                display: block;
-                animation: test 0.3s;
-                animation-direction: alternate;
+
+            & > a{
+                top: 100px;
+                opacity: 1;
             }
         }
-    }
-}
-
-@keyframes test{
-    from{
-        top: 140px;
-    }
-    to{
-        top: 100px;
     }
 }
