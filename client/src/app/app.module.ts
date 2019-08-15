@@ -1,3 +1,4 @@
+import { SharedModule } from './components/shared/shared.module';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,9 +22,7 @@ import { MerchModule } from './components/merch/merch.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     HomeComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +30,7 @@ import { MerchModule } from './components/merch/merch.module';
     ReactiveFormsModule,
     HttpClientModule,
     MerchModule,
+    SharedModule,
   ],
   providers: [
     {
