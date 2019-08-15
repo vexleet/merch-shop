@@ -9,11 +9,6 @@ import { FetchMerchDetailsResolver } from 'src/app/core/resolvers/fetch-merch-de
 
 const routes: Routes = [
     {
-        path: '',
-        redirectTo: 'all',
-        pathMatch: 'full',
-    },
-    {
         path: 'add',
         component: CreateMerchComponent,
     },

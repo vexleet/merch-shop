@@ -1,4 +1,3 @@
-import { AppRoutingModule } from './../../app-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MerchDetailsComponent } from './merch-details/merch-details.component';

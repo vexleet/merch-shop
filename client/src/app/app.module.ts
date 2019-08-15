@@ -24,8 +24,6 @@ import { MerchModule } from './components/merch/merch.module';
     NavComponent,
     HomeComponent,
     FooterComponent,
-    RegisterComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,

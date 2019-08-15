@@ -24,12 +24,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'account',
+    loadChildren: './components/authentication/account.module#AccountModule',
   },
   {
     path: 'collections',
