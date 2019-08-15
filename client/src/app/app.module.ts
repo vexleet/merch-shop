@@ -18,11 +18,13 @@ import { MerchShopComponent } from './components/merch/merch-shop/merch-shop.com
 import { MerchDetailsComponent } from './components/merch/merch-details/merch-details.component';
 import { ReplaceSpaces } from './core/pipes/replace-spaces.pipe';
 import { MerchModule } from './components/merch/merch.module';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,

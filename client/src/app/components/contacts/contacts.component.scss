@@ -1,0 +1,39 @@
+section{
+    width: 80%;
+    margin: 0 auto;
+
+    h1{
+        text-align: center;
+        margin-top: 0.5em;
+    }
+}
+
+form{
+    padding: 2em 0;
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+
+    input, textarea{
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 2em;
+        padding: 0.5em;
+        width: 100%;
+    }
+
+    button{
+        width: 300px;
+        padding: 1em;
+        cursor: pointer;
+        background: #0D19A3;
+        border: none;
+        font-size: 1em;
+        color: #16DB94;
+        transition: all 0.3s ease-in-out;
+
+        &:hover{
+            background: #08105B;
+        }
+    }
+}

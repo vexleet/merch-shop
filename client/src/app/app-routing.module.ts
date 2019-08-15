@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/authentication/register/register
 import { CreateMerchComponent } from './components/merch/create-merch/create-merch.component';
 import { FetchAllMerchResolver } from './core/resolvers/fetch-all-merch.resolver';
 import { MerchShopComponent } from './components/merch/merch-shop/merch-shop.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'collections',
     loadChildren: './components/merch/merch.module#MerchModule',
+  },
+  {
+    path: 'contact-us',
+    component: ContactsComponent,
   }
 ];
 
