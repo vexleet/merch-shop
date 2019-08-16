@@ -1,41 +1,34 @@
 <section>
     <h1>Shopping cart</h1>
 
-    <ul>
-        <li>
-            <img src="https://cdn.shopify.com/s/files/1/0048/8593/8240/products/mockup-50b57626_240x240.png?v=1549257452"
-                alt="">
+    <ul *ngIf="cartProducts">
+        <li *ngFor="let product of cartProducts">
+            <img src="{{product.merchImage}}" alt="">
 
             <div class="product-details">
-                <h6>Random merch name</h6>
+                <h4>{{product.merchName | uppercase}}</h4>
 
-                <p>White/XS</p>
+                <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
 
-                <button>Remove</button>
+                <button (click)="removeProduct(product.merchName)">Remove</button>
             </div>
 
+            <input type="number" name="quantity" #quantity id="quantity" value="{{product.quantity}}" min="1"
+                (change)="changeQuantityOfProduct(quantity, product)">
 
-            <input type="number" name="quantity" id="quantity">
-
-            <p class="price">$25.99</p>
-        </li>
-
-        <li>
-            <img src="https://cdn.shopify.com/s/files/1/0048/8593/8240/products/mockup-50b57626_240x240.png?v=1549257452"
-                alt="">
-
-            <div class="product-details">
-                <h6>Random merch name</h6>
-
-                <p>White/XS</p>
-
-                <button>Remove</button>
-            </div>
-
-
-            <input type="number" name="quantity" id="quantity">
-
-            <p class="price">$25.99</p>
+            <p class="price">${{product.price * product.quantity}}</p>
         </li>
     </ul>
+
+    <div *ngIf="!cartProducts || cartProducts.length == 0" class="empty-cart">
+        <h3>Your cart is currently empty.</h3>
+
+        <a routerLink="/collections/all">Continue browsing</a>
+    </div>
+
+    <div class="checkout">
+        <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
+
+        <a href="">Checkout</a>
+    </div>
 </section>

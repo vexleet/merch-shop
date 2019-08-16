@@ -1,3 +1,8 @@
+<div id="notification">
+    <p>Item added to cart. <a routerLink="/cart">View cart and check out.</a></p>
+    <fa-icon [icon]="faTimes" id="remove-notification" (click)="removeNotification()"></fa-icon>
+</div>
+
 <section>
     <div class="image">
         <img src="{{merch.imagesOfMerch[0]}}" alt="">

@@ -7,8 +7,7 @@ import { CreateMerchComponent } from './create-merch/create-merch.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReplaceSpaces } from 'src/app/core/pipes/replace-spaces.pipe';
 import { MerchRoutingModule } from './merch-routing.module';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,6 +21,7 @@ import { MerchRoutingModule } from './merch-routing.module';
     CommonModule,
     ReactiveFormsModule,
     MerchRoutingModule,
+    FontAwesomeModule
   ],
   exports: [
     MerchListComponent,

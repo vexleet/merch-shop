@@ -12,6 +12,7 @@ import { MerchModule } from './components/merch/merch.module';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
+import { SumPipe } from './core/pipes/sum-prices.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CartComponent } from './components/cart/cart.component';
     HomeComponent,
     ContactsComponent,
     CartComponent,
+    SumPipe,
   ],
   imports: [
     BrowserModule,
