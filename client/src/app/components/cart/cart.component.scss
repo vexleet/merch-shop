@@ -1,0 +1,52 @@
+section{
+    padding-bottom: 1em;
+
+    h1{
+        text-align: center;
+        margin: 1em 0;
+    }
+
+    ul{
+        width: 70%;
+        margin: 0 auto;
+        padding: 0;
+
+        li{
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr;
+            align-items: center;
+            grid-gap: 50px;
+
+            .product-details{
+                h6{
+                    font-weight: bold;
+                }
+
+                button{
+                    background: none;
+                    border: none;
+                    color: #08105B;
+                    font-size: 1em;
+                    cursor: pointer;
+                }
+            }
+
+            img{
+                width: 200px;
+                padding: 1em;
+            }
+            
+            input{
+                height: 20px;
+                padding: 1em 0.5em;
+                width: 80px;
+            }
+
+            .price{
+                font-size: 1.3em;
+                padding: 0;
+            }
+        }
+    }
+}

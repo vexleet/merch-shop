@@ -10,6 +10,11 @@
                 <li routerLink="/collections/add" *ngIf="isAdmin && !isAuthenticated">Add merch</li>
                 <li routerLink="/account/login" *ngIf="isAuthenticated">Account</li>
                 <li *ngIf="!isAuthenticated" (click)="logout()">Logout</li>
+                <li>
+                    <a routerLink="/cart">
+                        <fa-icon [icon]="faShoppingCart"></fa-icon>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

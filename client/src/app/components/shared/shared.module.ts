@@ -1,3 +1,4 @@
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './../../app-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { NavComponent } from './nav/nav.component';
     imports: [
         CommonModule,
         AppRoutingModule,
+        FontAwesomeModule
     ],
     exports: [
         NavComponent,

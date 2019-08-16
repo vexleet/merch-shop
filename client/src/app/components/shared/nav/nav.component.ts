@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 export class NavComponent implements OnInit, DoCheck {
   isAdmin: boolean;
   isAuthenticated: boolean;
+  faShoppingCart = faShoppingCart;
 
   constructor(
     private authService: AuthService,

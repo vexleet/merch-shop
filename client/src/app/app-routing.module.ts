@@ -1,3 +1,4 @@
+import { CartComponent } from './components/cart/cart.component';
 import { FetchMerchDetailsResolver } from './core/resolvers/fetch-merch-details.resolver';
 import { MerchDetailsComponent } from './components/merch/merch-details/merch-details.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactsComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
   }
 ];
 
