@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private readonly baseUrl = 'http://localhost:5000/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   register(body: Object) {
     return this.http.post(`${this.baseUrl}/signup`, body);
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.getCookie('token') === null;
+    return !this.jwtHelper.isTokenExpired(this.token);
   }
 
   isAdmin() {

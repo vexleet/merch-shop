@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -32,6 +32,7 @@ export class NavComponent implements OnInit, DoCheck {
     const hasLoggedOut = this.authService.logout();
 
     if (hasLoggedOut) {
+      this.isAdmin = false;
       this.router.navigate(['/']);
     }
   }

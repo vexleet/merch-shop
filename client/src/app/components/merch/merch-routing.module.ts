@@ -5,12 +5,17 @@ import { CreateMerchComponent } from './create-merch/create-merch.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FetchMerchDetailsResolver } from 'src/app/core/resolvers/fetch-merch-details.resolver';
+import { RoleGuard } from 'src/app/core/guards/role.guard';
 
 
 const routes: Routes = [
     {
         path: 'add',
         component: CreateMerchComponent,
+        canActivate: [RoleGuard],
+        data: {
+            expectedRole: 'Admin',
+        }
     },
     {
         path: 'all',

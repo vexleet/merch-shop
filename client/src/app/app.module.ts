@@ -1,3 +1,4 @@
+import { JwtModule } from '@auth0/angular-jwt';
 import { SharedModule } from './components/shared/shared.module';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,6 +31,13 @@ import { SumPipe } from './core/pipes/sum-prices.pipe';
     MerchModule,
     SharedModule,
     FontAwesomeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return document.cookie.match('(^|;) ?' + 'token' + '=([^;]*)(;|$)')[0];
+        }
+      }
+    })
   ],
   providers: [
     {

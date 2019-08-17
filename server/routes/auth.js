@@ -1,6 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const validator = require('validator')
+const authCheck = require('../config/auth-check');
 
 const router = new express.Router()
 
@@ -118,6 +119,13 @@ router.post('/login', (req, res, next) => {
       user: userData
     })
   })(req, res, next)
-})
+});
+
+router.get('/is-admin', authCheck, (req, res) => {
+  return res.status(200).json({
+    success: true,
+    isAdmin: req.user.roles.indexOf('Admin') !== -1,
+  });
+});
 
 module.exports = router

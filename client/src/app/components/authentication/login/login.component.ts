@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.loginForm.value)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
-        console.log(res);
         this.authService.saveUserInfo(res);
         this.router.navigate(['/']);
       });
