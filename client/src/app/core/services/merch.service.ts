@@ -15,10 +15,14 @@ export class MerchService {
   }
 
   getAllMerch() {
-    return this.http.get<IMerch[]>(`${this.baseUrl}/all-merch`);
+    return this.http.get<IMerch[]>(`${this.baseUrl}/all`);
   }
 
-  getDetailsOfMerch(nameOfMerch) {
-    return this.http.get<IMerch>(`${this.baseUrl}/all-merch/${nameOfMerch}`);
+  getDetailsOfMerch(nameOfMerch: string) {
+    return this.http.get<IMerch>(`${this.baseUrl}/details/${nameOfMerch}`);
+  }
+
+  deleteMerch(nameOfMerch: string) {
+    return this.http.delete(`${this.baseUrl}/delete/${nameOfMerch}`);
   }
 }

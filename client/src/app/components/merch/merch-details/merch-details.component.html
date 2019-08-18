@@ -33,7 +33,10 @@
                 <input type="number" formControlName="quantity" id="quantity">
             </div>
 
-            <button type="submit">ADD TO CART</button>
+            <button type="submit" *ngIf="!isAdmin">ADD TO CART</button>
+
         </form>
+
+        <button class="delete" (click)="deleteMerch()">Delete</button>
     </div>
 </section>

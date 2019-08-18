@@ -33,12 +33,11 @@ router.post('/create', authCheck, (req, res) => {
     else {
         return res.json({
             success: false,
-            message: 'Invalid credentials!',
         });
     }
 });
 
-router.get('/all-merch', (req, res) => {
+router.get('/all', (req, res) => {
     Merch.find()
         .then((data) => {
             return res.status(200).json({
@@ -48,7 +47,7 @@ router.get('/all-merch', (req, res) => {
         })
 });
 
-router.get('/all-merch/:name', (req, res) => {
+router.get('/details/:name', (req, res) => {
     const name = req.params.name.replace(/-/g, ' ');
 
     Merch.findOne({
@@ -60,6 +59,26 @@ router.get('/all-merch/:name', (req, res) => {
                 data: data,
             });
         });
+});
+
+router.delete('/delete/:name', authCheck, (req, res) => {
+    const name = req.params.name.replace(/-/g, ' ');
+
+    if (req.user.roles.indexOf('Admin') > -1) {
+        Merch
+            .findOneAndRemove({ "merchName": name })
+            .then((data) => {
+                return res.status(200).json({
+                    success: true,
+                    message: `${data.merchName} is successfully deleted!`,
+                });
+            });
+    }
+    else {
+        return res.json({
+            success: false,
+        });
+    }
 });
 
 module.exports = router;

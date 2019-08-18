@@ -54,7 +54,7 @@ section{
         div{
             display: flex;
             flex-direction: column;
-            width: 200px;
+            width: 180px;
 
             label{
                 font-size: 1.2em;
@@ -84,6 +84,21 @@ section{
             &:hover{
                 background: #08105B;
             }
+        }
+    }
+
+    .delete{
+        padding: 1em 2em;
+        margin-top: 1em;
+        border: none;
+        color: #fff;
+        background: rgb(223, 28, 28);
+        font-size: 1em;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover{
+            background: rgb(255, 0, 0);
         }
     }
 }

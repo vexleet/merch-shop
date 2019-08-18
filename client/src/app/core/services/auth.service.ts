@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,17 @@ export class AuthService {
   }
 
   isAdmin() {
-    return this.getCookie('isAdmin') === 'true';
+    const expectedRole = 'Admin';
+
+    const token = this.token;
+
+    if (token) {
+      const tokenPayload = decode(token);
+
+      return tokenPayload.role === expectedRole;
+    }
+
+    return false;
   }
 
   get token() {
@@ -54,7 +65,6 @@ export class AuthService {
     expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 
     document.cookie = `token = ${res['token']};expires=${expires.toUTCString}`;
-    document.cookie = `isAdmin = ${res['user']['roles'].length === 1};expires=${expires.toUTCString}`;
     document.cookie = `username = ${res['user']['username']};expires=${expires.toUTCString}`;
   }
 }

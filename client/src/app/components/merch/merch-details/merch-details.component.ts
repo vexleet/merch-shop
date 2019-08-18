@@ -1,6 +1,8 @@
+import { MerchService } from 'src/app/core/services/merch.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from './../../../core/services/cart.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { IMerch } from 'src/app/core/models';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -14,12 +16,17 @@ export class MerchDetailsComponent implements OnInit {
   merch: IMerch;
   productForm: FormGroup;
   faTimes = faTimes;
+  isAdmin: boolean;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private cartService: CartService) {
+    private router: Router,
+    private cartService: CartService,
+    private authService: AuthService,
+    private merchService: MerchService) {
     this.merch = this.route.snapshot.data['merchDetails'].data;
+    this.isAdmin = this.authService.isAdmin();
 
     this.productForm = this.fb.group({
       color: [this.merch.colors[0]],
@@ -54,4 +61,13 @@ export class MerchDetailsComponent implements OnInit {
     document.getElementById('remove-notification').style.opacity = '0';
   }
 
+  deleteMerch() {
+    const name = this.route.snapshot.params.name;
+
+    this.merchService
+      .deleteMerch(name)
+      .subscribe((data) => {
+        this.router.navigate(['/home']);
+      });
+  }
 }
