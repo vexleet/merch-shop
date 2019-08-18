@@ -2,12 +2,44 @@ section{
     width: 80%;
     margin: 0 auto;
 
+    .collection-filter{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        input{
+            padding: 0.5em;
+            height: 0%;
+        }
+
+        label{
+            display: block;
+        }
+
+        .collection-sorts{
+            display: flex;
+
+            .collection-sort{
+                select{
+                    width: 190px;
+                }
+                &:not(:last-child){
+                    margin-right: 1em;
+                }
+            }
+        }
+
+        select{
+            border: 0px;
+            outline: 0px; 
+            padding: 0.5em;
+        }
+    }
+
     h1{
         margin: 1em 0 .5em 0;
     }
 
-    input{
-        padding: 0.5em;
-    }
+    
     
 }

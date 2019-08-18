@@ -1,7 +1,31 @@
 <section>
     <h1>Products</h1>
 
-    <input type="text" placeholder="Search" #toSearch (input)="searchMerch(toSearch)">
+    <div class="collection-filter">
+        <input type="text" placeholder="Search" #toSearch
+            (input)="searchMerch(toSearch.value, filterBy.value, sortBy.value)">
 
-    <app-merch-list [merch]="this.searchedMerch || this.merch"></app-merch-list>
+        <div class="collection-sorts">
+            <div class="collection-sort">
+                <label for="sort-by">Filter by:</label>
+                <select (change)="filterMerch(filterBy.value, toSearch.value, sortBy)" #filterBy>
+                    <option *ngFor="let current of filterByOptions" value="{{current['value']}}">{{current['label']}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="collection-sort">
+                <label for="sort-by">Sort by:</label>
+                <select (change)="sortMerch(sortBy.value)" #sortBy>
+                    <option *ngFor="let current of sortByOptions" value="{{current['value']}}">{{current['label']}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <app-merch-list [merch]="this.merch"></app-merch-list>
 </section>
