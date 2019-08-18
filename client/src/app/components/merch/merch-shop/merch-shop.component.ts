@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchShopComponent implements OnInit {
   merch: Array<IMerch>;
+  searchedMerch: Array<IMerch>;
 
   constructor(
     private route: ActivatedRoute) {
@@ -16,6 +17,10 @@ export class MerchShopComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  searchMerch(toSearch: Object) {
+    this.searchedMerch = this.merch.filter(merch => merch.merchName.includes(toSearch['value']));
   }
 
 }
