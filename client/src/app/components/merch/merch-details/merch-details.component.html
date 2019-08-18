@@ -37,6 +37,6 @@
 
         </form>
 
-        <button class="delete" (click)="deleteMerch()">Delete</button>
+        <button class="delete" (click)="deleteMerch()" *ngIf="isAdmin">Delete</button>
     </div>
 </section>

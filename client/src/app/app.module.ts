@@ -13,7 +13,7 @@ import { MerchModule } from './components/merch/merch.module';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
-import { SumPipe } from './core/pipes/sum-prices.pipe';
+import { SharedPipesModule } from './shared/shared-pipes.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,6 @@ import { SumPipe } from './core/pipes/sum-prices.pipe';
     HomeComponent,
     ContactsComponent,
     CartComponent,
-    SumPipe,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +36,8 @@ import { SumPipe } from './core/pipes/sum-prices.pipe';
           return document.cookie.match('(^|;) ?' + 'token' + '=([^;]*)(;|$)')[0];
         }
       }
-    })
+    }),
+    SharedPipesModule,
   ],
   providers: [
     {

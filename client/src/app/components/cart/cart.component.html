@@ -6,7 +6,11 @@
             <img src="{{product.merchImage}}" alt="">
 
             <div class="product-details">
-                <h4>{{product.merchName | uppercase}}</h4>
+                <h4>
+                    <a routerLink="/collections/details/{{product.merchName | replaceSpaces}}">
+                        {{product.merchName | uppercase}}
+                    </a>
+                </h4>
 
                 <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
 

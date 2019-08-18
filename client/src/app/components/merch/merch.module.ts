@@ -5,9 +5,9 @@ import { MerchListComponent } from './merch-list/merch-list.component';
 import { MerchShopComponent } from './merch-shop/merch-shop.component';
 import { CreateMerchComponent } from './create-merch/create-merch.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ReplaceSpaces } from 'src/app/core/pipes/replace-spaces.pipe';
 import { MerchRoutingModule } from './merch-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedPipesModule } from '../../shared/shared-pipes.module';
 
 @NgModule({
   declarations: [
@@ -15,13 +15,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MerchListComponent,
     MerchShopComponent,
     CreateMerchComponent,
-    ReplaceSpaces,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MerchRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedPipesModule,
   ],
   exports: [
     MerchListComponent,

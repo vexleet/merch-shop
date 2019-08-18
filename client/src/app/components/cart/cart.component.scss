@@ -21,6 +21,15 @@ section{
             .product-details{
                 h4{
                     font-weight: bold;
+
+                    a{
+                        color: #000;
+                        transition: all 0.3s ease-in-out;
+                        
+                        &:hover{
+                            color: #0D19A3;
+                        }
+                    }
                 }
 
                 button{
