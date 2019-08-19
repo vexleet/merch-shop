@@ -34,14 +34,14 @@ export class MerchShopComponent implements OnInit {
     this.sortMerch('a-to-z');
   }
 
-  searchMerch(toSearch: string, filterBy: string, sortBy: string) {
+  searchMerch(toSearch: string, filterBy: string, sortBy: string): void {
     this.merch = this._merch.filter(merch => merch.merchName.includes(toSearch)
       && ('all' === filterBy ? true : merch.typeOfMerch.toLowerCase() === filterBy));
 
     this.sortMerch(sortBy);
   }
 
-  sortMerch(sortBy: string) {
+  sortMerch(sortBy: string): void {
     switch (sortBy) {
       case 'a-to-z':
         this.merch = this.merch.sort((a, b) => {
@@ -86,20 +86,8 @@ export class MerchShopComponent implements OnInit {
 
   }
 
-  filterMerch(filterBy: string, toSearch: string, sortBy: string) {
-    if (toSearch !== '') {
-      this.searchMerch(toSearch, filterBy, sortBy);
-
-      return;
-    }
-
-    if (filterBy === 'all') {
-      this.merch = this._merch;
-
-      return;
-    }
-
-    this.merch = this._merch.filter((x) => x.typeOfMerch.toLowerCase() === filterBy);
+  filterMerch(filterBy: string, toSearch: string, sortBy: string): void {
+    this.searchMerch(toSearch, filterBy, sortBy);
   }
 
 }

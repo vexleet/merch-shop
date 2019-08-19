@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,15 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
-  register(body: Object) {
+  register(body: Object): Observable<object> {
     return this.http.post(`${this.baseUrl}/signup`, body);
   }
 
-  login(body: Object) {
+  login(body: Object): Observable<object> {
     return this.http.post(`${this.baseUrl}/login`, body);
   }
 
-  logout() {
+  logout(): boolean {
     const cookies = document.cookie.split(";");
 
     for (let i = 0; i < cookies.length; i++) {
@@ -32,11 +33,11 @@ export class AuthService {
     return true;
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !this.jwtHelper.isTokenExpired(this.token);
   }
 
-  isAdmin() {
+  isAdmin(): boolean {
     const expectedRole = 'Admin';
 
     const token = this.token;
@@ -50,17 +51,17 @@ export class AuthService {
     return false;
   }
 
-  get token() {
+  get token(): string {
     return this.getCookie('token');
   }
 
 
-  getCookie(key: string) {
+  getCookie(key: string): string {
     const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
     return keyValue ? keyValue[2] : null;
   }
 
-  saveUserInfo(res: Object) {
+  saveUserInfo(res: Object): void {
     const expires = new Date();
     expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 

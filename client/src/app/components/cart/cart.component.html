@@ -18,7 +18,7 @@
             </div>
 
             <input type="number" name="quantity" #quantity id="quantity" value="{{product.quantity}}" min="1"
-                (change)="changeQuantityOfProduct(quantity, product)">
+                (change)="changeQuantityOfProduct(quantity.value, product)">
 
             <p class="price">${{product.price * product.quantity}}</p>
         </li>
@@ -30,7 +30,7 @@
         <a routerLink="/collections/all">Continue browsing</a>
     </div>
 
-    <div class="checkout" *ngIf="cartProducts">
+    <div class="checkout" *ngIf="cartProducts.length">
         <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
 
         <a href="">Checkout</a>

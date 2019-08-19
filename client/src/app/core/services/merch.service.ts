@@ -1,6 +1,7 @@
 import { IMerch } from './../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,19 @@ export class MerchService {
 
   constructor(private http: HttpClient) { }
 
-  createMerch(body: IMerch) {
-    return this.http.post(`${this.baseUrl}/create`, body);
+  createMerch(body: IMerch): Observable<IMerch> {
+    return this.http.post<IMerch>(`${this.baseUrl}/create`, body);
   }
 
-  getAllMerch() {
+  getAllMerch(): Observable<IMerch[]> {
     return this.http.get<IMerch[]>(`${this.baseUrl}/all`);
   }
 
-  getDetailsOfMerch(nameOfMerch: string) {
+  getDetailsOfMerch(nameOfMerch: string): Observable<IMerch> {
     return this.http.get<IMerch>(`${this.baseUrl}/details/${nameOfMerch}`);
   }
 
-  deleteMerch(nameOfMerch: string) {
+  deleteMerch(nameOfMerch: string): Observable<object> {
     return this.http.delete(`${this.baseUrl}/delete/${nameOfMerch}`);
   }
 }

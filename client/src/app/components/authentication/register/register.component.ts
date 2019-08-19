@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class RegisterComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
-  registerForm = this.fb.group({
+  registerForm: FormGroup = this.fb.group({
     username: [''],
     email: [''],
     password: [''],
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  register() {
+  register(): void {
     this.authService.register(this.registerForm.value)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {

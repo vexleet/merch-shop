@@ -1,5 +1,6 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
+import { ICartProduct } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class CartService {
   constructor(
     private authService: AuthService) { }
 
-  addProductToCart(productDetails) {
+  addProductToCart(productDetails: ICartProduct): void {
     const cart = JSON.parse(this.authService.getCookie('cart')) || [];
     let isInCart = false;
     let indexOfProduct = -1;
@@ -38,11 +39,11 @@ export class CartService {
     document.cookie = `cart = ${JSON.stringify(cart)};expires=${expires};path=/`;
   }
 
-  getCartProducts() {
+  getCartProducts(): string {
     return this.authService.getCookie('cart');
   }
 
-  changeQuantityOfProduct(quantity, productDetails) {
+  changeQuantityOfProduct(quantity: string, productDetails: ICartProduct): void {
     const cart = JSON.parse(this.authService.getCookie('cart'));
 
     for (let i = 0; i < cart.length; i++) {
@@ -57,7 +58,7 @@ export class CartService {
     }
   }
 
-  removeProduct(merchName) {
+  removeProduct(merchName: string): void {
     const cart = JSON.parse(this.authService.getCookie('cart'));
 
     for (let i = 0; i < cart.length; i++) {

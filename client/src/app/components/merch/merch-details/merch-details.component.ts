@@ -38,7 +38,7 @@ export class MerchDetailsComponent implements OnInit {
     });
   }
 
-  addToCart() {
+  addToCart(): void {
     const productDetails = {
       color: this.productForm.get('color').value,
       size: this.productForm.get('size').value,
@@ -55,14 +55,14 @@ export class MerchDetailsComponent implements OnInit {
     this.cartService.addProductToCart(productDetails);
   }
 
-  removeNotification() {
+  removeNotification(): void {
     document.getElementById('notification').style.height = '0';
     document.getElementById('notification').style.padding = '0';
     document.getElementById('remove-notification').style.opacity = '0';
   }
 
-  deleteMerch() {
-    const name = this.route.snapshot.params.name;
+  deleteMerch(): void {
+    const name: string = this.route.snapshot.params.name;
 
     this.merchService
       .deleteMerch(name)

@@ -1,5 +1,6 @@
 import { CartService } from './../../core/services/cart.service';
 import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
+import { ICartProduct } from 'src/app/core/models';
 
 @Component({
   selector: 'app-cart',
@@ -7,8 +8,7 @@ import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, DoCheck {
-  cartProducts;
-  price;
+  cartProducts: Array<ICartProduct>;
 
   constructor(
     private cartService: CartService) { }
@@ -21,11 +21,11 @@ export class CartComponent implements OnInit, DoCheck {
     this.cartProducts = JSON.parse(this.cartService.getCartProducts());
   }
 
-  changeQuantityOfProduct(quantity, productDetails) {
-    this.cartService.changeQuantityOfProduct(quantity.value, productDetails);
+  changeQuantityOfProduct(quantity: string, productDetails: ICartProduct): void {
+    this.cartService.changeQuantityOfProduct(quantity, productDetails);
   }
 
-  removeProduct(merchName) {
+  removeProduct(merchName: string): void {
     this.cartService.removeProduct(merchName);
   }
 

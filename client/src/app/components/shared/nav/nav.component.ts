@@ -27,7 +27,7 @@ export class NavComponent implements OnInit, DoCheck {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  logout() {
+  logout(): void {
     const hasLoggedOut = this.authService.logout();
 
     if (hasLoggedOut) {

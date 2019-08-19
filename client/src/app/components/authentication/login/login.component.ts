@@ -1,6 +1,6 @@
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class LoginComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
-  loginForm = this.fb.group({
+  loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  login() {
+  login(): void {
     this.authService.login(this.loginForm.value)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
