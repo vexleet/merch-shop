@@ -11,11 +11,10 @@ export class CartComponent implements OnInit, DoCheck {
   price;
 
   constructor(
-    private cartService: CartService) {
-    this.cartProducts = JSON.parse(this.cartService.getCartProducts());
-  }
+    private cartService: CartService) { }
 
   ngOnInit() {
+    this.cartProducts = JSON.parse(this.cartService.getCartProducts());
   }
 
   ngDoCheck() {

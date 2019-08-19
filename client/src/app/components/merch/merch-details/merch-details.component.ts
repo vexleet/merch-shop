@@ -24,7 +24,10 @@ export class MerchDetailsComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private authService: AuthService,
-    private merchService: MerchService) {
+    private merchService: MerchService) { }
+
+  ngOnInit() {
+
     this.merch = this.route.snapshot.data['merchDetails'].data;
     this.isAdmin = this.authService.isAdmin();
 
@@ -33,9 +36,6 @@ export class MerchDetailsComponent implements OnInit {
       size: [this.merch.sizes[0]],
       quantity: [1],
     });
-  }
-
-  ngOnInit() {
   }
 
   addToCart() {

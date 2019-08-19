@@ -11,11 +11,10 @@ export class HomeComponent implements OnInit {
   merch: Array<IMerch>;
 
   constructor(
-    private route: ActivatedRoute) {
-    this.merch = this.route.snapshot.data['merch'].data;
-  }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.merch = this.route.snapshot.data['merch'].data;
   }
 
 }

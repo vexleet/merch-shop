@@ -15,12 +15,11 @@ export class NavComponent implements OnInit, DoCheck {
 
   constructor(
     private authService: AuthService,
-    private router: Router) {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.isAdmin = this.authService.isAdmin();
-  }
+    private router: Router) { }
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   ngDoCheck() {
