@@ -17,6 +17,7 @@ export class MerchDetailsComponent implements OnInit {
   productForm: FormGroup;
   faTimes = faTimes;
   isAdmin: boolean;
+  imagesKeys: Array<string>;
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +31,8 @@ export class MerchDetailsComponent implements OnInit {
 
     this.merch = this.route.snapshot.data['merchDetails'].data;
     this.isAdmin = this.authService.isAdmin();
+
+    this.imagesKeys = Object.keys(this.merch.imagesOfMerch);
 
     this.productForm = this.fb.group({
       color: [this.merch.colors[0]],
@@ -69,5 +72,11 @@ export class MerchDetailsComponent implements OnInit {
       .subscribe((data) => {
         this.router.navigate(['/home']);
       });
+  }
+
+  changeImage(imageColor: string) {
+    this.productForm.value.color = imageColor;
+
+    this.productForm.patchValue({ color: imageColor });
   }
 }

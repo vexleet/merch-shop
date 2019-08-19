@@ -1,11 +1,11 @@
 <ul id="view-element">
     <li *ngFor="let item of merch" class="view-element">
-        <img src="{{item.imagesOfMerch[0]}}" alt="">
+        <img src="{{item.imagesOfMerch | getFirstImage}}" alt="">
 
         <h6>{{item.merchName | uppercase}}</h6>
 
         <p>${{item.price}}</p>
 
-        <a routerLink="/collections/details/{{item.merchName | replaceSpaces}}">View</a>
+        <a routerLink="/collections/details/{{item.merchName | replaceSpaces}}">View </a>
     </li>
 </ul>

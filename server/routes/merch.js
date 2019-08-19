@@ -18,6 +18,7 @@ router.post('/create', authCheck, (req, res) => {
                 });
             })
             .catch(error => {
+                console.log(error);
                 let message = 'Something went wrong. Check the form for errors';
 
                 if (error.code === 11000) {

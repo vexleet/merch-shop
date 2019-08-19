@@ -3,7 +3,7 @@ export interface IMerch {
     merchName: string;
     price: number;
     typeOfMerch: string;
-    imagesOfMerch: Array<string>;
+    imagesOfMerch: object;
     sizes: Array<string>;
     colors: Array<string>;
 }

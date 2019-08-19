@@ -32,11 +32,23 @@ section{
     display: flex;
     justify-content: space-between;
     justify-items: center;
-    width: 80%;
+    width: 90%;
     margin: 3em auto;
+
+    .all-images{
+        width: 150px;
+        margin-right: 20px;
+        height: 410px;
+        overflow: auto;
+        
+        img{
+            width: 100%;
+        }
+    }
     
     .image{
-        width: 600px;
+        width: 550px;
+        margin-right: 20px;
         img{
             width: 100%;
         }
@@ -44,6 +56,10 @@ section{
 
     h1{
         margin: 0;
+    }
+
+    .details{
+        width: 615px; 
     }
     
     form{

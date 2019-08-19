@@ -4,8 +4,12 @@
 </div>
 
 <section>
+    <div class="all-images">
+        <img *ngFor="let imageColor of imagesKeys" src="{{merch.imagesOfMerch[imageColor]}}" alt=""
+            (click)="changeImage(imageColor)">
+    </div>
     <div class="image">
-        <img src="{{merch.imagesOfMerch[0]}}" alt="">
+        <img src="{{merch.imagesOfMerch[color.value]}}" alt="">
     </div>
 
     <div class="details">
@@ -16,7 +20,7 @@
         <form (ngSubmit)="addToCart()" [formGroup]="productForm">
             <div>
                 <label for="color">Color</label>
-                <select formControlName="color" id="color">
+                <select formControlName="color" id="color" #color>
                     <option *ngFor="let color of merch.colors" value="{{color}}">{{color | uppercase}}</option>
                 </select>
             </div>

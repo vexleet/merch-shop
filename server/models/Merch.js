@@ -6,7 +6,7 @@ const merchSchema = new Schema({
     price: { type: Number, required: true },
     colors: { type: [String], required: true },
     sizes: { type: [String], required: true },
-    imagesOfMerch: { type: [String], required: true },
+    imagesOfMerch: { type: Schema.Types.Mixed, required: true },
     typeOfMerch: { type: String, required: true }
 });
 

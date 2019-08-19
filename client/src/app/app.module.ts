@@ -14,6 +14,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
 import { SharedPipesModule } from './shared/shared-pipes.module';
+import { GetFirstImagePipe } from './core/pipes/get-first-image.pipe';
 
 @NgModule({
   declarations: [
