@@ -42,5 +42,6 @@
         </form>
 
         <button class="delete" (click)="deleteMerch()" *ngIf="isAdmin">Delete</button>
+        <button class="edit" routerLink="/collections/edit/{{merch.merchName | replaceSpaces}}">Edit</button>
     </div>
 </section>

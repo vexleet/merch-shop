@@ -1,0 +1,25 @@
+<form [formGroup]="merchEditForm" (ngSubmit)="editMerch()">
+  <input formControlName="merchName" type="text" placeholder="Enter the name of the merch" *ngIf="!newDetailsForMerch">
+
+  <input formControlName="price" type="number" placeholder="Enter the price of the merch" *ngIf="!newDetailsForMerch">
+
+  <select formControlName="typeOfMerch" id="typeOfMerch" *ngIf="!newDetailsForMerch">
+    <option *ngFor="let type of typesOfMerch" [selected]="type === merchDetails.typeOfMerch">{{type}}</option>
+  </select>
+
+  <input formControlName="sizes" type="text" placeholder="Enter sizes for the merch and seperate them with ','"
+    *ngIf="!newDetailsForMerch">
+
+  <input formControlName="colors" type="text" placeholder="Enter colors for the merch and seperate them with ','"
+    *ngIf="!newDetailsForMerch">
+
+  <button type="button" (click)="updateDetailsForMerch()" *ngIf="!newDetailsForMerch">Continue</button>
+
+  <div *ngIf="newDetailsForMerch">
+    <input type="text" *ngFor="let color of newDetailsForMerch.colors" placeholder="Image for {{color}} color"
+      formControlName="{{color}}">
+
+    <button type="submit">Submit</button>
+  </div>
+
+</form>

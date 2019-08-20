@@ -1,31 +1,25 @@
 <form [formGroup]="merchCreateForm" (ngSubmit)="createMerch()">
-    <input formControlName="merchName" type="text" placeholder="Enter the name of the merch" *ngIf="!newMerchDetails">
+  <input formControlName="merchName" type="text" placeholder="Enter the name of the merch" *ngIf="!newMerchDetails">
 
-    <input formControlName="price" type="number" placeholder="Enter the price of the merch" *ngIf="!newMerchDetails">
+  <input formControlName="price" type="number" placeholder="Enter the price of the merch" *ngIf="!newMerchDetails">
 
-    <select formControlName="typeOfMerch" id="typeOfMerch" *ngIf="!newMerchDetails">
-        <option *ngFor="let type of typesOfMerch">{{type}}</option>
-    </select>
+  <select formControlName="typeOfMerch" id="typeOfMerch" *ngIf="!newMerchDetails">
+    <option *ngFor="let type of typesOfMerch">{{type}}</option>
+  </select>
 
-    <!-- <input formControlName="imagesOfMerch" type="text" placeholder="Enter link for image"> -->
+  <input formControlName="sizes" type="text" placeholder="Enter sizes for the merch and seperate them with ','"
+    *ngIf="!newMerchDetails">
 
-    <input formControlName="sizes" type="text" placeholder="Enter sizes for the merch and seperate them with ','"
-        *ngIf="!newMerchDetails">
+  <input formControlName="colors" type="text" placeholder="Enter colors for the merch and seperate them with ','"
+    *ngIf="!newMerchDetails">
 
-    <input formControlName="colors" type="text" placeholder="Enter colors for the merch and seperate them with ','"
-        *ngIf="!newMerchDetails">
+  <button type="button" (click)="addDetailsForNewMerch()" *ngIf="!newMerchDetails">Continue</button>
 
-    <button type="button" (click)="addDetailsForNewMerch()" *ngIf="!newMerchDetails">Continue</button>
+  <div *ngIf="newMerchDetails">
+    <input type="text" *ngFor="let color of newMerchDetails.colors" placeholder="Image for {{color}} color"
+      formControlName="{{color}}">
 
-    <div *ngIf="newMerchDetails">
-        <input type="text" *ngFor="let color of newMerchDetails.colors" placeholder="Image for {{color}} color"
-            formControlName="{{color}}">
-
-        <button type="submit">Submit</button>
-    </div>
+    <button type="submit">Submit</button>
+  </div>
 
 </form>
-
-<!-- <form (ngSubmit)="addDetailsForNewMerch()">
-
-</form> -->

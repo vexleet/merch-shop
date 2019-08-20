@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FetchMerchDetailsResolver } from 'src/app/core/resolvers/fetch-merch-details.resolver';
 import { RoleGuard } from 'src/app/core/guards/role.guard';
+import { MerchEditComponent } from './merch-edit/merch-edit.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,17 @@ const routes: Routes = [
         component: MerchDetailsComponent,
         resolve: {
             merchDetails: FetchMerchDetailsResolver,
+        }
+    },
+    {
+        path: 'edit/:name',
+        component: MerchEditComponent,
+        resolve: {
+            merchDetails: FetchMerchDetailsResolver,
+        },
+        canActivate: [RoleGuard],
+        data: {
+            expectedRole: 'Admin',
         }
     }
 ];

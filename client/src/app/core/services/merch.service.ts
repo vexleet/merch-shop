@@ -26,4 +26,8 @@ export class MerchService {
   deleteMerch(nameOfMerch: string): Observable<object> {
     return this.http.delete(`${this.baseUrl}/delete/${nameOfMerch}`);
   }
+
+  editMerch(nameOfMerch: string, body: IMerch): Observable<object> {
+    return this.http.put<IMerch>(`${this.baseUrl}/edit/${nameOfMerch}`, body);
+  }
 }

@@ -1,120 +1,138 @@
-#notification{
-    text-align: center;
-    background: #0D19A3;  
-    color: #fff;  
-    transition: all 0.5s ease-in-out;
-    height: 0;
+#notification {
+  text-align: center;
+  background: #0D19A3;
+  color: #fff;
+  transition: all 0.5s ease-in-out;
+  height: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  p {
+    padding: 0;
+    position: relative;
+  }
+
+  a {
+    font-weight: bold;
+    color: #fff;
+  }
+
+  #remove-notification {
     position: absolute;
-    left: 0;
-    right: 0;   
-
-    p{
-        padding: 0;
-        position: relative;
-    }
-
-    a{
-        font-weight: bold;
-        color: #fff;
-    }
-
-    #remove-notification{
-        position: absolute;
-        right: 30px;
-        bottom: 8px;
-        opacity: 0;
-        transition: all 0.5s ease-in-out;
-        cursor: pointer;
-    }
+    right: 30px;
+    bottom: 8px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+  }
 }
 
-section{
+section {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  width: 90%;
+  margin: 3em auto;
+
+  .all-images {
+    width: 150px;
+    margin-right: 20px;
+    height: 410px;
+    overflow: auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .image {
+    width: 550px;
+    margin-right: 20px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .details {
+    width: 615px;
+  }
+
+  form {
     display: flex;
-    justify-content: space-between;
-    justify-items: center;
-    width: 90%;
-    margin: 3em auto;
+    align-items: flex-end;
+    flex-wrap: wrap;
 
-    .all-images{
-        width: 150px;
-        margin-right: 20px;
-        height: 410px;
-        overflow: auto;
-        
-        img{
-            width: 100%;
-        }
-    }
-    
-    .image{
-        width: 550px;
-        margin-right: 20px;
-        img{
-            width: 100%;
-        }
-    }
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 180px;
 
-    h1{
-        margin: 0;
+      label {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+      }
+
+      input,
+      select {
+        height: 35px;
+        padding-left: 5px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
     }
 
-    .details{
-        width: 615px; 
+    button {
+      padding: 1em;
+      margin-top: 1em;
+      border: none;
+      color: #16DB94;
+      background: #0D19A3;
+      font-size: 1em;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background: #08105B;
+      }
     }
-    
-    form{
-        display: flex;
-        align-items: flex-end;
-        flex-wrap: wrap;
+  }
 
-        div{
-            display: flex;
-            flex-direction: column;
-            width: 180px;
+  .delete {
+    padding: 1em 2em;
+    margin-top: 1em;
+    border: none;
+    color: #fff;
+    background: rgb(223, 28, 28);
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
-            label{
-                font-size: 1.2em;
-                margin-bottom: 5px;
-            }
-
-            input, select{
-                height: 35px;
-                padding-left: 5px;
-            }
-
-            &:not(:last-child){
-                margin-right: 1em;
-            }
-        }
-
-        button{
-            padding: 1em;
-            margin-top: 1em;
-            border: none;
-            color: #16DB94;
-            background: #0D19A3;
-            font-size: 1em;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-
-            &:hover{
-                background: #08105B;
-            }
-        }
+    &:hover {
+      background: rgb(255, 0, 0);
     }
+  }
 
-    .delete{
-        padding: 1em 2em;
-        margin-top: 1em;
-        border: none;
-        color: #fff;
-        background: rgb(223, 28, 28);
-        font-size: 1em;
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
+  .edit {
+    padding: 1em 2em;
+    margin-top: 1em;
+    margin-left: 1em;
+    border: none;
+    color: #fff;
+    background: rgb(42, 235, 106);
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
-        &:hover{
-            background: rgb(255, 0, 0);
-        }
+    &:hover {
+      background: rgb(27, 173, 100);
     }
+  }
 }

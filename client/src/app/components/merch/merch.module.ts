@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MerchRoutingModule } from './merch-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedPipesModule } from '../../shared/shared-pipes.module';
+import { MerchEditComponent } from './merch-edit/merch-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SharedPipesModule } from '../../shared/shared-pipes.module';
     MerchListComponent,
     MerchShopComponent,
     CreateMerchComponent,
+    MerchEditComponent,
   ],
   imports: [
     CommonModule,

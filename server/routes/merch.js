@@ -30,8 +30,7 @@ router.post('/create', authCheck, (req, res) => {
                     message: message,
                 })
             });
-    }
-    else {
+    } else {
         return res.json({
             success: false,
         });
@@ -52,8 +51,8 @@ router.get('/details/:name', (req, res) => {
     const name = req.params.name.replace(/-/g, ' ');
 
     Merch.findOne({
-        merchName: name
-    })
+            merchName: name
+        })
         .then((data) => {
             return res.status(200).json({
                 success: true,
@@ -67,15 +66,39 @@ router.delete('/delete/:name', authCheck, (req, res) => {
 
     if (req.user.roles.indexOf('Admin') > -1) {
         Merch
-            .findOneAndRemove({ "merchName": name })
+            .findOneAndRemove({
+                "merchName": name
+            })
             .then((data) => {
                 return res.status(200).json({
                     success: true,
                     message: `${data.merchName} is successfully deleted!`,
                 });
             });
+    } else {
+        return res.json({
+            success: false,
+        });
     }
-    else {
+});
+
+router.put('/edit/:name', authCheck, (req, res) => {
+    const name = req.params.name.replace(/-/g, ' ');
+
+    const newBody = req.body;
+
+    if (req.user.roles.indexOf('Admin') > -1) {
+        Merch.findOneAndUpdate({
+            merchName: name
+        }, newBody, {
+            new: true
+        }).then((data) => {
+            return res.status(200).json({
+                success: true,
+                message: `${data.merchName} is successfully updated!`,
+            });
+        })
+    } else {
         return res.json({
             success: false,
         });
