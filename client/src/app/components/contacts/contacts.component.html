@@ -1,18 +1,18 @@
 <section>
-    <h1>Contact us</h1>
+  <h1>Contact us</h1>
 
-    <p>If you have any suggestions for new products or designs you'd like to see or if you have any questions feel free
-        to email us at info@epicirl.shop</p>
+  <p>If you have any suggestions for new products or designs you'd like to see or if you have any questions feel free
+    to email us at info@epicirl.shop</p>
 
-    <form [formGroup]="contactsForm">
-        <input formControlName="name" type="text" placeholder="Name">
+  <form [formGroup]="contactsForm" (ngSubmit)="sendMail()">
+    <input formControlName="name" type="text" placeholder="Name">
 
-        <input formControlName="email" type="email" placeholder="Email">
+    <input formControlName="email" type="email" placeholder="Email">
 
-        <input formControlName="phoneNumber" type="text" placeholder="Phone Number">
+    <input formControlName="subject" type="text" placeholder="Subject">
 
-        <textarea name="" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+    <textarea name="" id="message" cols="30" rows="10" placeholder="Message"></textarea>
 
-        <button type="submit">Submit</button>
-    </form>
+    <button type="submit">Submit</button>
+  </form>
 </section>
