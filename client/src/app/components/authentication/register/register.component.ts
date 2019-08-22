@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -37,6 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService.register(this.registerForm.value)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
+        this.toastr.success(res['message']);
         this.router.navigate(['/account/login']);
       });
   }

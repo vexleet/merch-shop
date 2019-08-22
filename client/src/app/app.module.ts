@@ -14,7 +14,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
 import { SharedPipesModule } from './shared/shared-pipes.module';
-import { GetFirstImagePipe } from './core/pipes/get-first-image.pipe';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,10 @@ import { GetFirstImagePipe } from './core/pipes/get-first-image.pipe';
       }
     }),
     SharedPipesModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

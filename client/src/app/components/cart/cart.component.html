@@ -1,38 +1,38 @@
 <section>
-    <h1>Shopping cart</h1>
+  <h1>Shopping cart</h1>
 
-    <ul *ngIf="cartProducts">
-        <li *ngFor="let product of cartProducts">
-            <img src="{{product.merchImage}}" alt="">
+  <ul *ngIf="cartProducts">
+    <li *ngFor="let product of cartProducts">
+      <img src="{{product.merchImage}}" alt="">
 
-            <div class="product-details">
-                <h4>
-                    <a routerLink="/collections/details/{{product.merchName | replaceSpaces}}">
-                        {{product.merchName | uppercase}}
-                    </a>
-                </h4>
+      <div class="product-details">
+        <h4>
+          <a routerLink="/collections/details/{{product.merchName | replaceSpaces}}">
+            {{product.merchName | uppercase}}
+          </a>
+        </h4>
 
-                <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
+        <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
 
-                <button (click)="removeProduct(product.merchName)">Remove</button>
-            </div>
+        <button (click)="removeProduct(product.merchName)">Remove</button>
+      </div>
 
-            <input type="number" name="quantity" #quantity id="quantity" value="{{product.quantity}}" min="1"
-                (change)="changeQuantityOfProduct(quantity.value, product)">
+      <input type="number" name="quantity" #quantity id="quantity" value="{{product.quantity}}" min="1"
+        (change)="changeQuantityOfProduct(quantity.value, product)">
 
-            <p class="price">${{product.price * product.quantity}}</p>
-        </li>
-    </ul>
+      <p class="price">${{product.price * product.quantity}}</p>
+    </li>
+  </ul>
 
-    <div *ngIf="!cartProducts || cartProducts.length == 0" class="empty-cart">
-        <h3>Your cart is currently empty.</h3>
+  <div *ngIf="!cartProducts || cartProducts.length == 0" class="empty-cart">
+    <h3>Your cart is currently empty.</h3>
 
-        <a routerLink="/collections/all">Continue browsing</a>
-    </div>
+    <a routerLink="/collections/all">Continue browsing</a>
+  </div>
 
-    <div class="checkout" *ngIf="cartProducts.length">
-        <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
+  <div class="checkout" *ngIf="cartProducts.length">
+    <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
 
-        <a href="">Checkout</a>
-    </div>
+    <a href="">Checkout</a>
+  </div>
 </section>

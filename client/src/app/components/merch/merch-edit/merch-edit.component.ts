@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MerchService } from './../../../core/services/merch.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -24,7 +25,8 @@ export class MerchEditComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private merchService: MerchService) { }
+    private merchService: MerchService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.nameOfMerch = this.route.snapshot.params.name;
@@ -81,8 +83,6 @@ export class MerchEditComponent implements OnInit {
 
     this.newDetailsForMerch = bodyForNewDetails;
 
-    console.log(this.newDetailsForMerch);
-
     for (const color of this.newDetailsForMerch.colors) {
       if (!this.merchEditForm.get(color)) {
         this.merchEditForm.addControl(color, new FormControl(''));
@@ -102,8 +102,14 @@ export class MerchEditComponent implements OnInit {
     this.merchService
       .editMerch(this.nameOfMerch, this.newDetailsForMerch)
       .subscribe((res) => {
-        console.log(res);
-        this.router.navigate(['/home']);
+        if (res['success']) {
+          this.toastr.success(res['message']);
+          this.router.navigate(['/home']);
+        }
+        else {
+          this.toastr.error('Something went wrong. Check the input fields');
+          this.newDetailsForMerch = undefined;
+        }
       });
   }
 

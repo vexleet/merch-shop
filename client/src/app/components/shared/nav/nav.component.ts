@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, DoCheck, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
@@ -15,7 +16,8 @@ export class NavComponent implements OnInit, DoCheck {
 
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
@@ -32,6 +34,7 @@ export class NavComponent implements OnInit, DoCheck {
 
     if (hasLoggedOut) {
       this.isAdmin = false;
+      this.toastr.success('You have successfully logged out!');
       this.router.navigate(['/']);
     }
   }

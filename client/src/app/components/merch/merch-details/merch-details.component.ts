@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { IMerch } from 'src/app/core/models';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-merch-details',
@@ -25,7 +26,8 @@ export class MerchDetailsComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private authService: AuthService,
-    private merchService: MerchService) { }
+    private merchService: MerchService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
 
@@ -48,7 +50,7 @@ export class MerchDetailsComponent implements OnInit {
       quantity: this.productForm.get('quantity').value,
       merchName: this.merch.merchName,
       price: this.merch.price,
-      merchImage: this.merch.imagesOfMerch[0],
+      merchImage: this.merch.imagesOfMerch[this.productForm.get('color').value],
     };
 
     document.getElementById('notification').style.height = '45px';
@@ -69,8 +71,14 @@ export class MerchDetailsComponent implements OnInit {
 
     this.merchService
       .deleteMerch(name)
-      .subscribe((data) => {
-        this.router.navigate(['/home']);
+      .subscribe((res) => {
+        if (res['success']) {
+          this.toastr.success(res['message']);
+          this.router.navigate(['/home']);
+        }
+        else {
+          this.toastr.error('Something went wrong.');
+        }
       });
   }
 

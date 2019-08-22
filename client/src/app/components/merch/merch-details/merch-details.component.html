@@ -1,47 +1,48 @@
 <div id="notification">
-    <p>Item added to cart. <a routerLink="/cart">View cart and check out.</a></p>
-    <fa-icon [icon]="faTimes" id="remove-notification" (click)="removeNotification()"></fa-icon>
+  <p>Item added to cart. <a routerLink="/cart">View cart and check out.</a></p>
+  <fa-icon [icon]="faTimes" id="remove-notification" (click)="removeNotification()"></fa-icon>
 </div>
 
 <section>
-    <div class="all-images">
-        <img *ngFor="let imageColor of imagesKeys" src="{{merch.imagesOfMerch[imageColor]}}" alt=""
-            (click)="changeImage(imageColor)">
-    </div>
-    <div class="image">
-        <img src="{{merch.imagesOfMerch[color.value]}}" alt="">
-    </div>
+  <div class="all-images">
+    <img *ngFor="let imageColor of imagesKeys" src="{{merch.imagesOfMerch[imageColor]}}" alt=""
+      (click)="changeImage(imageColor)">
+  </div>
+  <div class="image">
+    <img src="{{merch.imagesOfMerch[color.value]}}" alt="">
+  </div>
 
-    <div class="details">
-        <h1>{{merch.merchName | uppercase}}</h1>
+  <div class="details">
+    <h1>{{merch.merchName | uppercase}}</h1>
 
-        <h5>${{merch.price}}</h5>
+    <h5>${{merch.price}}</h5>
 
-        <form (ngSubmit)="addToCart()" [formGroup]="productForm">
-            <div>
-                <label for="color">Color</label>
-                <select formControlName="color" id="color" #color>
-                    <option *ngFor="let color of merch.colors" value="{{color}}">{{color | uppercase}}</option>
-                </select>
-            </div>
+    <form (ngSubmit)="addToCart()" [formGroup]="productForm">
+      <div>
+        <label for="color">Color</label>
+        <select formControlName="color" id="color" #color>
+          <option *ngFor="let color of merch.colors" value="{{color}}">{{color | uppercase}}</option>
+        </select>
+      </div>
 
-            <div>
-                <label for="size">Size</label>
-                <select formControlName="size" id="size">
-                    <option *ngFor="let size of merch.sizes" value="{{size}}">{{size | uppercase}}</option>
-                </select>
-            </div>
+      <div>
+        <label for="size">Size</label>
+        <select formControlName="size" id="size">
+          <option *ngFor="let size of merch.sizes" value="{{size}}">{{size | uppercase}}</option>
+        </select>
+      </div>
 
-            <div>
-                <label for="quantity">Quantity</label>
-                <input type="number" formControlName="quantity" id="quantity">
-            </div>
+      <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" formControlName="quantity" id="quantity">
+      </div>
 
-            <button type="submit" *ngIf="!isAdmin">ADD TO CART</button>
+      <button type="submit" *ngIf="!isAdmin">ADD TO CART</button>
 
-        </form>
+    </form>
 
-        <button class="delete" (click)="deleteMerch()" *ngIf="isAdmin">Delete</button>
-        <button class="edit" routerLink="/collections/edit/{{merch.merchName | replaceSpaces}}">Edit</button>
-    </div>
+    <button class="delete" (click)="deleteMerch()" *ngIf="isAdmin">Delete</button>
+    <button class="edit" routerLink="/collections/edit/{{merch.merchName | replaceSpaces}}"
+      *ngIf="isAdmin">Edit</button>
+  </div>
 </section>

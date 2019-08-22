@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ContactService } from './../../core/services/contact.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,8 @@ export class ContactsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -26,8 +28,13 @@ export class ContactsComponent implements OnInit {
   sendMail() {
     this.contactService.sendMail(this.contactsForm.value)
       .subscribe((res) => {
-        console.log(res);
-        this.router.navigate(['/']);
+        if (res['success']) {
+          this.toastr.success(res['message']);
+          this.router.navigate(['/']);
+        }
+        else {
+          this.toastr.error(res['messsage']);
+        }
       });
   }
 }

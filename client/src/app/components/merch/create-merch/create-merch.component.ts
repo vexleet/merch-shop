@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MerchService } from 'src/app/core/services/merch.service';
@@ -25,7 +26,8 @@ export class CreateMerchComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private merchService: MerchService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -59,7 +61,15 @@ export class CreateMerchComponent implements OnInit {
 
     this.merchService.createMerch(this.newMerchDetails)
       .subscribe((res) => {
-        this.router.navigate(['/']);
+        if (res['success']) {
+          console.log(res);
+          this.toastr.success('You added new merch!');
+          this.router.navigate(['/']);
+        }
+        else {
+          this.toastr.error('Something went wrong. Check the input fields');
+          this.newMerchDetails = undefined;
+        }
       });
   }
 }
