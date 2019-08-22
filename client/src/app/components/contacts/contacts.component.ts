@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class ContactsComponent implements OnInit {
   contactsForm: FormGroup = this.fb.group({
-    name: [''],
     email: [''],
     subject: [''],
     message: [''],

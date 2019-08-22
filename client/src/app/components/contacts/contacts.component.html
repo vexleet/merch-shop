@@ -5,13 +5,11 @@
     to email us at info@epicirl.shop</p>
 
   <form [formGroup]="contactsForm" (ngSubmit)="sendMail()">
-    <input formControlName="name" type="text" placeholder="Name">
-
     <input formControlName="email" type="email" placeholder="Email">
 
     <input formControlName="subject" type="text" placeholder="Subject">
 
-    <textarea name="" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+    <textarea formControlName="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
 
     <button type="submit">Submit</button>
   </form>
