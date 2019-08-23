@@ -16,6 +16,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { SharedPipesModule } from './shared/shared-pipes.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     ContactsComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
