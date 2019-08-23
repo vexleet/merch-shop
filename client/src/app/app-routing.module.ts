@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FetchMerchDetailsResolver } from './core/resolvers/fetch-merch-details.resolver';
 import { MerchDetailsComponent } from './components/merch/merch-details/merch-details.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   }
 ];
 

@@ -1,3 +1,24 @@
 <div>
+  <form [formGroup]="informationForm">
+    <label for="full-name">First & last name</label>
+    <input formControlName="fullName" type="text" placeholder="First & last name">
 
+    <label for="email">Email adress</label>
+    <input formControlName="email" type="email" placeholder="Email adress">
+
+    <label for="adress">Adress</label>
+    <input formControlName="adress" type="text" placeholder="Adress">
+
+    <label for="country">Country</label>
+    <input formControlName="country" type="text" placeholder="Country">
+
+    <label for="city">City</label>
+    <input formControlName="city" type="text" placeholder="City">
+
+    <label for="postal-code">Postal Code</label>
+    <input formControlName="postalCode" type="text" placeholder="Postal Code">
+
+    <label for="phone">Phone</label>
+    <input formControlName="phone" type="text" placeholder="Phone">
+  </form>
 </div>

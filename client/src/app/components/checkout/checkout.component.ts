@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+  informationForm = this.fb.group({
+    fullName: [''],
+    email: [''],
+    adress: [''],
+    country: [''],
+    city: [''],
+    phone: [''],
+    postalCode: [''],
+  });
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder) { }
 
   ngOnInit() {
   }

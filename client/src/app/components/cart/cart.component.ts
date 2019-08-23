@@ -22,17 +22,17 @@ export class CartComponent implements OnInit, DoCheck, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    paypal.Buttons({
-      createOrder: () => {
-        return new Promise(resolve => {
-          this.checkoutService.checkOutPaypal(this.cartProducts)
-            .subscribe((res) => {
-              console.log(res);
-              resolve(res["orderID"]);
-            });
-        });
-      },
-    }).render('#paypal-button-container');
+    // paypal.Buttons({
+    //   createOrder: () => {
+    //     return new Promise(resolve => {
+    //       this.checkoutService.checkOutPaypal(this.cartProducts)
+    //         .subscribe((res) => {
+    //           console.log(res);
+    //           resolve(res["orderID"]);
+    //         });
+    //     });
+    //   },
+    // }).render('#paypal-button-container');
   }
 
   ngDoCheck() {
