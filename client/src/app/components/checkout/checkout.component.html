@@ -1,24 +1,73 @@
-<div>
-  <form [formGroup]="informationForm">
-    <label for="full-name">First & last name</label>
-    <input formControlName="fullName" type="text" placeholder="First & last name">
+<section class="checkout">
 
-    <label for="email">Email adress</label>
-    <input formControlName="email" type="email" placeholder="Email adress">
+  <div class="checkout-details">
+    <form [formGroup]="informationForm" class="information-form">
+      <h3>Billing Details</h3>
+      <label for="full-name">First & last name</label>
+      <input formControlName="fullName" type="text" placeholder="First & last name">
 
-    <label for="adress">Adress</label>
-    <input formControlName="adress" type="text" placeholder="Adress">
+      <label for="email">Email adress</label>
+      <input formControlName="email" type="email" placeholder="Email adress">
 
-    <label for="country">Country</label>
-    <input formControlName="country" type="text" placeholder="Country">
+      <label for="adress">Adress</label>
+      <input formControlName="adress" type="text" placeholder="Adress">
 
-    <label for="city">City</label>
-    <input formControlName="city" type="text" placeholder="City">
+      <label for="country">Country</label>
+      <input formControlName="country" type="text" placeholder="Country">
 
-    <label for="postal-code">Postal Code</label>
-    <input formControlName="postalCode" type="text" placeholder="Postal Code">
+      <label for="city">City</label>
+      <input formControlName="city" type="text" placeholder="City">
 
-    <label for="phone">Phone</label>
-    <input formControlName="phone" type="text" placeholder="Phone">
-  </form>
-</div>
+      <label for="postal-code">Postal Code</label>
+      <input formControlName="postalCode" type="text" placeholder="Postal Code">
+
+      <label for="phone">Phone</label>
+      <input formControlName="phone" type="text" placeholder="Phone">
+    </form>
+
+    <form [formGroup]="paymentForm" class="payment-form">
+      <h3>Payment method</h3>
+      <div class="radio">
+        <input type="radio" name="payment" value="credit" #credit (click)="changePayment(credit.value)"> Credit card
+        <img
+          src="https://banner2.kisspng.com/20180523/wqt/kisspng-mastercard-credit-card-american-express-visa-debit-mbna-5b0525b571e990.8787905215270639894666.jpg"
+          alt="">
+      </div>
+
+      <div class="credit-card" #creditCard>
+        <label for="card-number">Card Number</label>
+        <input formControlName="cardNumber" type="text" placeholder="Card Number">
+
+        <label for="exp-date">Experation Date</label>
+        <input formControlName="expDate" type="text" placeholder="Experation Date">
+
+        <label for="security-code">Security Code</label>
+        <input formControlName="securityCode" type="text" placeholder="Security Code">
+
+        <button>Place Order</button>
+      </div>
+
+      <div class="radio">
+        <input type="radio" name="payment" value="paypal" #paypalInput (click)="changePayment(paypalInput.value)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1280px-PayPal.svg.png" alt="">
+      </div>
+
+      <div id="paypal" #paypal></div>
+    </form>
+  </div>
+
+  <div class="cart-details">
+    <ul>
+      <li *ngFor="let product of cartProducts">
+        <img src="{{product.merchImage}}" alt="">
+        <div>
+          <h5> {{product.merchName}} x{{product.quantity}}</h5>
+          <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
+        </div>
+      </li>
+    </ul>
+
+    <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
+  </div>
+
+</section>

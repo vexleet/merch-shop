@@ -1,6 +1,12 @@
-form {
-  width: 400px;
+.checkout {
+  display: flex;
+  justify-content: space-between;
   margin: 2em auto;
+  width: 80%;
+}
+
+form.information-form {
+  width: 400px;
 
   label {
     margin: 0.5em 0;
@@ -11,5 +17,65 @@ form {
     width: 100%;
     display: block;
     padding: 0.5em;
+  }
+}
+
+form.payment-form {
+  width: 400px;
+  margin: 0 auto;
+
+  div.radio {
+    background: rgb(187, 187, 187);
+    width: 100%;
+    padding: 0.5em;
+    margin: 1em 0;
+    display: flex;
+    align-items: center;
+
+
+    img {
+      width: 100px;
+    }
+  }
+
+  div.credit-card {
+    label {
+      margin: 0.5em 0;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      display: block;
+      padding: 0.5em;
+    }
+  }
+
+  .credit-card,
+  #paypal {
+    display: none;
+  }
+
+  #paypal {
+    width: 100%;
+  }
+}
+
+.cart-details {
+  width: 500px;
+
+  ul li {
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+
+    img {
+      width: 150px;
+      margin-right: 1.5em;
+    }
+  }
+
+  h4 {
+    text-align: right;
   }
 }
