@@ -1,37 +1,51 @@
 const express = require('express');
-const payPalClient = require('../common/payPalClient');
-const paypal = require('@paypal/checkout-server-sdk');
+const request = require('request');
 
 const router = new express.Router();
 
-router.post('/paypal', async (req, res) => {
+router.post('/paypal/create-order', async (req, res) => {
     const reqBody = req.body;
-    const request = new paypal.orders.OrdersCreateRequest();
-    request.prefer("return=representation");
 
-    const total = reqBody.reduce((a, b) => a + b['price'] * b['quantity'], 0);
+    await request.post("https://api.sandbox.paypal.com/v2/checkout/orders", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        auth: {
+            bearer: "A21AAEDhie8koy9jC-jqh8lkyvMapvUKu2LjM8HrvqirQ1hcv8goA6rQ5f-G3mxN8xV8L1necSCt9ATq41t6aIF0xsW7PSGVA"
+        },
+        body: JSON.stringify({
+            "intent": "CAPTURE",
+            "purchase_units": [{
+                "amount": {
+                    "currency_code": "USD",
+                    "value": reqBody.reduce((a, b) => a + b["price"] * b["quantity"], 0)
+                }
+            }],
+        })
+    }, function (error, response, body) {
+        const parsedBody = JSON.parse(body);
 
-    request.requestBody({
-        intent: 'CAPTURE',
-        purchase_units: [{
-            amount: {
-                currency_code: 'USD',
-                value: total.toString()
-            }
-        }]
+        return res.status(200).json({
+            orderID: parsedBody["id"]
+        });
     });
+});
 
-    let order;
+router.get('/paypal/capture-order/:order_id', async (req, res) => {
+    const orderID = req.params.order_id;
 
-    try {
-        order = await payPalClient.client().execute(request);
-    } catch (err) {
-        console.error(err);
-        return res.send(500);
-    }
-
-    res.status(200).json({
-        orderID: order.result.id
+    await request.post(`https://api.sandbox.paypal.com/v2/checkout/orders/${orderID}/capture`, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        auth: {
+            bearer: "A21AAEDhie8koy9jC-jqh8lkyvMapvUKu2LjM8HrvqirQ1hcv8goA6rQ5f-G3mxN8xV8L1necSCt9ATq41t6aIF0xsW7PSGVA"
+        }
+    }, function (error, response, body) {
+        console.log(body);
+        return res.status(200).json({
+            data: JSON.parse(body)
+        });
     });
 });
 

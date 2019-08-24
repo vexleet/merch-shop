@@ -1,8 +1,10 @@
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from './../../core/services/cart.service';
 import { CheckoutService } from './../../core/services/checkout.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ICartProduct } from 'src/app/core/models';
+import { Router } from '@angular/router';
 
 declare let paypal;
 
@@ -31,14 +33,17 @@ export class CheckoutComponent implements OnInit {
     securityCode: ['']
   });
 
+  orderID: string;
 
   cartProducts: Array<ICartProduct>;
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private renderer: Renderer2,
     private checkoutService: CheckoutService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.cartProducts = JSON.parse(this.cartService.getCartProducts());
@@ -46,16 +51,22 @@ export class CheckoutComponent implements OnInit {
     paypal.Buttons({
       createOrder: (data, actions) => {
         return new Promise(resolve => {
-          this.checkoutService.checkOutPaypal(this.cartProducts)
+          this.checkoutService.createOrderPaypal(this.cartProducts)
             .subscribe((res) => {
+              this.orderID = res["orderID"];
               resolve(res["orderID"]);
             });
         });
       },
 
       onApprove: async (data, actions) => {
-        const order = await actions.order.capture();
-        console.log(order);
+        this.checkoutService.captureOrderPaypal(this.orderID)
+          .subscribe((res) => {
+            document.cookie = 'cart = []';
+
+            this.toastrService.success('Thank you! Your order has been received.');
+            this.router.navigate(['/']);
+          });
       }
     }).render(this.paypalElement.nativeElement);
   }

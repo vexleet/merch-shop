@@ -10,7 +10,11 @@ export class CheckoutService {
   constructor(
     private http: HttpClient) { }
 
-  checkOutPaypal(body) {
-    return this.http.post(`${this.baseUrl}/paypal`, body);
+  createOrderPaypal(body) {
+    return this.http.post(`${this.baseUrl}/paypal/create-order`, body);
+  }
+
+  captureOrderPaypal(orderID) {
+    return this.http.get(`${this.baseUrl}/paypal/capture-order/${orderID}`);
   }
 }
