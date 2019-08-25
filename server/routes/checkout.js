@@ -11,20 +11,20 @@ router.post('/paypal/create-order', async (req, res) => {
             "Content-Type": "application/json",
         },
         auth: {
-            bearer: "A21AAEDhie8koy9jC-jqh8lkyvMapvUKu2LjM8HrvqirQ1hcv8goA6rQ5f-G3mxN8xV8L1necSCt9ATq41t6aIF0xsW7PSGVA"
+            bearer: "A21AAEV354xmZ1AgFb0cofN8h2zLJGcqPXQ4XFil5XETVBZHZMz2Txa6Psnk1YRTvKS9xj0ETweaUrd8wQ12w03dDlrbZdGFg"
         },
         body: JSON.stringify({
             "intent": "CAPTURE",
             "purchase_units": [{
                 "amount": {
                     "currency_code": "USD",
-                    "value": reqBody.reduce((a, b) => a + b["price"] * b["quantity"], 0)
+                    "value": (reqBody.reduce((a, b) => a + b["price"] * b["quantity"], 0)).toFixed(2)
                 }
             }],
         })
     }, function (error, response, body) {
         const parsedBody = JSON.parse(body);
-
+        console.log(body);
         return res.status(200).json({
             orderID: parsedBody["id"]
         });
@@ -39,14 +39,49 @@ router.get('/paypal/capture-order/:order_id', async (req, res) => {
             "Content-Type": "application/json",
         },
         auth: {
-            bearer: "A21AAEDhie8koy9jC-jqh8lkyvMapvUKu2LjM8HrvqirQ1hcv8goA6rQ5f-G3mxN8xV8L1necSCt9ATq41t6aIF0xsW7PSGVA"
+            bearer: "A21AAEV354xmZ1AgFb0cofN8h2zLJGcqPXQ4XFil5XETVBZHZMz2Txa6Psnk1YRTvKS9xj0ETweaUrd8wQ12w03dDlrbZdGFg"
         }
     }, function (error, response, body) {
-        console.log(body);
         return res.status(200).json({
             data: JSON.parse(body)
         });
     });
+});
+
+router.post('/stripe/create-card', async (req, res) => {
+    const reqBody = req.body;
+
+    await request.post("https://api.stripe.com/v1/tokens", {
+        auth: {
+            bearer: "pk_test_rCB3b9qzy0A8MHQjChtzZ17X00AtnWS7ZF",
+        },
+        form: {
+            "card[number]": reqBody["cardNumber"],
+            "card[exp_month]": reqBody["expMonth"],
+            "card[exp_year]": reqBody["expYear"],
+            "card[cvc]": reqBody["cvc"]
+        }
+    }, function (error, response, body) {
+        const bodyParsed = JSON.parse(body);
+
+        request.post("https://api.stripe.com/v1/charges", {
+            auth: {
+                bearer: "sk_test_oCdUi6zmTbilVt3yxff5rQtY00bvchtCNn",
+            },
+            form: {
+                "amount": 24.99 * 100,
+                "currency": "usd",
+                "source": bodyParsed["id"],
+                "description": "Charge for jenny.rosen@example.com"
+            }
+        }, function (error, response, body) {
+            return res.status(200).json({
+                data: JSON.parse(body),
+            });
+        })
+    });
+
+
 });
 
 module.exports = router;

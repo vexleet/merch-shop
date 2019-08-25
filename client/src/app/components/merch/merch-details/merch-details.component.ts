@@ -4,7 +4,7 @@ import { CartService } from './../../../core/services/cart.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { IMerch } from 'src/app/core/models';
+import { IMerch, ICartProduct } from 'src/app/core/models';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
@@ -44,12 +44,12 @@ export class MerchDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
-    const productDetails = {
+    const productDetails: ICartProduct = {
       color: this.productForm.get('color').value,
       size: this.productForm.get('size').value,
       quantity: this.productForm.get('quantity').value,
       merchName: this.merch.merchName,
-      price: this.merch.price,
+      price: Number(this.merch.price.toFixed(2)),
       merchImage: this.merch.imagesOfMerch[this.productForm.get('color').value],
     };
 

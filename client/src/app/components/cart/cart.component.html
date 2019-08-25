@@ -20,7 +20,7 @@
       <input type="number" name="quantity" #quantity id="quantity" value="{{product.quantity}}" min="1"
         (change)="changeQuantityOfProduct(quantity.value, product)">
 
-      <p class="price">${{product.price * product.quantity}}</p>
+      <p class="price">${{(product.price * product.quantity).toFixed(2)}}</p>
     </li>
   </ul>
 
