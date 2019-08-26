@@ -1,7 +1,13 @@
 <form [formGroup]="merchCreateForm" (ngSubmit)="createMerch()">
   <input formControlName="merchName" type="text" placeholder="Enter the name of the merch" *ngIf="!newMerchDetails">
+  <p class="error" *ngIf="merchName.hasError('required') && merchName.dirty">This field is required.</p>
+  <p class="error" *ngIf="merchName.hasError('minlength') && !merchName.hasError('required') && merchName.dirty">Merch
+    name must be at least 4 chars</p>
 
   <input formControlName="price" type="number" placeholder="Enter the price of the merch" *ngIf="!newMerchDetails">
+  <p class="error" *ngIf="price.hasError('required') && price.dirty">This field is required.</p>
+  <p class="error" *ngIf="price.hasError('min') && !price.hasError('required') && price.dirty">Price must be a number
+    bigger than 0.</p>
 
   <select formControlName="typeOfMerch" id="typeOfMerch" *ngIf="!newMerchDetails">
     <option *ngFor="let type of typesOfMerch">{{type}}</option>
@@ -9,11 +15,18 @@
 
   <input formControlName="sizes" type="text" placeholder="Enter sizes for the merch and seperate them with ','"
     *ngIf="!newMerchDetails">
+  <p class="error" *ngIf="sizes.hasError('required') && sizes.dirty">This field is required.</p>
+  <p class="error" *ngIf="sizes.hasError('minlength') && !sizes.hasError('required') && sizes.dirty">Enter at least 1
+    color.</p>
 
   <input formControlName="colors" type="text" placeholder="Enter colors for the merch and seperate them with ','"
     *ngIf="!newMerchDetails">
+  <p class="error" *ngIf="colors.hasError('required') && colors.dirty">This field is required.</p>
+  <p class="error" *ngIf="colors.hasError('minlength') && !colors.hasError('required') && colors.dirty">Enter at least 1
+    color.</p>
 
-  <button type="button" (click)="addDetailsForNewMerch()" *ngIf="!newMerchDetails">Continue</button>
+  <button type="button" (click)="addDetailsForNewMerch()" *ngIf="!newMerchDetails"
+    [disabled]="merchCreateForm.invalid">Continue</button>
 
   <div *ngIf="newMerchDetails">
     <input type="text" *ngFor="let color of newMerchDetails.colors" placeholder="Image for {{color}} color"

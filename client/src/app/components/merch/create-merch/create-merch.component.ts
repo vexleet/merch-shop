@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MerchService } from 'src/app/core/services/merch.service';
 import { Router } from '@angular/router';
@@ -12,11 +12,11 @@ import { IMerch } from 'src/app/core/models';
 })
 export class CreateMerchComponent implements OnInit {
   merchCreateForm: FormGroup = this.fb.group({
-    merchName: [''],
-    price: [''],
-    typeOfMerch: [''],
-    sizes: [''],
-    colors: [''],
+    merchName: ['', [Validators.required, Validators.minLength(4)]],
+    price: ['', [Validators.required, Validators.min(1)]],
+    typeOfMerch: ['', [Validators.required]],
+    sizes: ['', [Validators.required, Validators.minLength(1)]],
+    colors: ['', [Validators.required, Validators.minLength(1)]],
   });
 
   newMerchDetails: IMerch;
@@ -45,7 +45,7 @@ export class CreateMerchComponent implements OnInit {
     this.newMerchDetails['imagesOfMerch'] = {};
 
     for (const color of this.newMerchDetails.colors) {
-      this.merchCreateForm.addControl(color, new FormControl(''));
+      this.merchCreateForm.addControl(color, new FormControl(['', Validators.required]));
     }
 
   }
@@ -61,8 +61,8 @@ export class CreateMerchComponent implements OnInit {
 
     this.merchService.createMerch(this.newMerchDetails)
       .subscribe((res) => {
+        console.log(res);
         if (res['success']) {
-          console.log(res);
           this.toastr.success('You added new merch!');
           this.router.navigate(['/']);
         }
@@ -71,5 +71,21 @@ export class CreateMerchComponent implements OnInit {
           this.newMerchDetails = undefined;
         }
       });
+  }
+
+  get merchName() {
+    return this.merchCreateForm.get('merchName');
+  }
+
+  get price() {
+    return this.merchCreateForm.get('price');
+  }
+
+  get colors() {
+    return this.merchCreateForm.get('colors');
+  }
+
+  get sizes() {
+    return this.merchCreateForm.get('sizes');
   }
 }

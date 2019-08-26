@@ -24,16 +24,15 @@
     </li>
   </ul>
 
-  <div *ngIf="!cartProducts || cartProducts.length == 0" class="empty-cart">
+  <div *ngIf="!cartProducts || !cartProducts.length" class="empty-cart">
     <h3>Your cart is currently empty.</h3>
 
     <a routerLink="/collections/all">Continue browsing</a>
   </div>
-
-  <div class="checkout" *ngIf="cartProducts.length">
+  <!-- {{cartProducts || !cartProducts.length}} -->
+  <div class="checkout" *ngIf="cartProducts">
     <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
 
     <a routerLink="/checkout">Checkout</a>
-    <div #paypal></div>
   </div>
 </section>

@@ -1,5 +1,5 @@
 form{
-    padding: 2em 0;
+    padding: 0 0 2em 0;
     text-align: center;
     width: 500px;
     margin: 0 auto;
@@ -7,7 +7,7 @@ form{
     input, select{
         display: block;
         margin: 0 auto;
-        margin-bottom: 2em;
+        margin-top: 2em;
         padding: 0.5em;
         width: 100%;
     }
@@ -21,9 +21,17 @@ form{
         font-size: 1em;
         color: #16DB94;
         transition: all 0.3s ease-in-out;
+        margin-top: 2em;
 
         &:hover{
             background: #08105B;
         }
     }
+
+    .error {
+        color: red;
+        text-align: left;
+        padding: 0;
+        padding-top: 0.5em;
+      }
 }
