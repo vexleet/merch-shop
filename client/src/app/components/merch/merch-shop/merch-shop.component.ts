@@ -35,7 +35,7 @@ export class MerchShopComponent implements OnInit {
   }
 
   searchMerch(toSearch: string, filterBy: string, sortBy: string): void {
-    this.merch = this._merch.filter(merch => merch.merchName.includes(toSearch)
+    this.merch = this._merch.filter(merch => merch.merchName.toLowerCase().includes(toSearch.toLowerCase())
       && ('all' === filterBy ? true : merch.typeOfMerch.toLowerCase() === filterBy));
 
     this.sortMerch(sortBy);
