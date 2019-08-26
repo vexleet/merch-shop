@@ -19,7 +19,7 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.cartProducts = JSON.parse(this.cartService.getCartProducts());
+    this.cartProducts = JSON.parse(this.cartService.getCartProducts()) || [];
   }
 
   changeQuantityOfProduct(quantity: string, productDetails: ICartProduct): void {

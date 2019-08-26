@@ -29,8 +29,8 @@
 
     <a routerLink="/collections/all">Continue browsing</a>
   </div>
-  <!-- {{cartProducts || !cartProducts.length}} -->
-  <div class="checkout" *ngIf="cartProducts">
+
+  <div class="checkout" *ngIf="cartProducts.length">
     <h4>Total: ${{cartProducts | sumPrices:'price'}}</h4>
 
     <a routerLink="/checkout">Checkout</a>
