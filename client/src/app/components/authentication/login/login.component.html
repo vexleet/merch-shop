@@ -1,16 +1,14 @@
 <form (ngSubmit)="login()" [formGroup]="loginForm">
-  <!-- <mat-form-field> -->
   <input formControlName="email" matInput type="email" placeholder="Your email...">
-  <!-- <mat-hint *ngIf="username.invalid">Enter a valid username.</mat-hint>
-      <mat-error *ngIf="username.hasError('required')">Username is required.</mat-error>
-      <mat-error *ngIf="username.hasError('minlength')">Username is less than 3 characters.</mat-error>
-    </mat-form-field>
-    <mat-form-field> -->
+  <p class="error" *ngIf="email.hasError('required') && email.dirty">This field is required.</p>
+  <p class="error" *ngIf="email.hasError('pattern') && !email.hasError('required') && email.dirty">Enter valid email in
+    format: yourname@example.com</p>
+
   <input formControlName="password" matInput type="password" placeholder="Your password...">
-  <!-- <mat-hint *ngIf="password.invalid">Enter a valid password.</mat-hint>
-      <mat-error *ngIf="password.hasError('required')">Password is required.</mat-error>
-      <mat-error *ngIf="password.hasError('minlength')">Password must be at least 6 symbols.</mat-error>
-    </mat-form-field> -->
+  <p class="error" *ngIf="password.hasError('required') && password.dirty">This field is required.</p>
+  <p class="error" *ngIf="password.hasError('minlength') && !password.hasError('required') && password.dirty">Password
+    must be at lesat 8 chars.</p>
+
   <button color="primary">Log in</button>
 </form>
 

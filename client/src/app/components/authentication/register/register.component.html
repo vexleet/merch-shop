@@ -1,10 +1,21 @@
 <form (ngSubmit)="register()" [formGroup]="registerForm">
-    <input formControlName="username" type="text" placeholder="Your username...">
+  <input formControlName="username" type="text" placeholder="Your username...">
+  <p class="error" *ngIf="username.hasError('required') && username.dirty">This field is required.</p>
+  <p class="error" *ngIf="username.hasError('minlength') && !username.hasError('required') && username.dirty">Username
+    must be at least 4 chars.</p>
 
-    <input formControlName="email" type="email" placeholder="Your email...">
+  <input formControlName="email" type="email" placeholder="Your email...">
+  <p class="error" *ngIf="email.hasError('required') && email.dirty">This field is required.</p>
+  <p class="error" *ngIf="email.hasError('pattern') && !email.hasError('required') && email.dirty">Enter valid email in
+    format: yourname@example.com</p>
 
-    <input formControlName="password" type="password" placeholder="Your password...">
-    <input formControlName="repeatPassword" type="password" placeholder="Repeat password...">
+  <input formControlName="password" type="password" placeholder="Your password...">
+  <p class="error" *ngIf="password.hasError('required') && password.dirty">This field is required.</p>
+  <p class="error" *ngIf="password.hasError('minlength') && !password.hasError('required') && password.dirty">Password
+    must be at least 8 chars.</p>
 
-    <button color="primary">Register</button>
+  <input formControlName="repeatPassword" type="password" placeholder="Repeat password...">
+  <p class="error" *ngIf="repeatPassword.hasError('MatchPassword') && repeatPassword.dirty">Passwords don't match.</p>
+
+  <button color="primary">Register</button>
 </form>

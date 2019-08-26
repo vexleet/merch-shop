@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    email: ['', [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   constructor(
@@ -37,10 +37,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.loginForm.value)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
-        this.authService.saveUserInfo(res);
-        this.toastr.success(res['message']);
-        this.router.navigate(['/']);
+        if (!res['success']) {
+          this.toastr.error('Email or password is invalid.');
+        }
+        else {
+          this.authService.saveUserInfo(res);
+          this.toastr.success(res['message']);
+          this.router.navigate(['/']);
+        }
       });
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
 }
