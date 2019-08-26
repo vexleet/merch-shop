@@ -1,17 +1,18 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { ICartProduct } from '../models';
+
+declare let setCookie: any;
+declare let getCookie: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(
-    private authService: AuthService) { }
+  constructor() { }
 
   addProductToCart(productDetails: ICartProduct): void {
-    const cart = JSON.parse(this.authService.getCookie('cart')) || [];
+    const cart = JSON.parse(getCookie('cart')) || [];
     let isInCart = false;
     let indexOfProduct = -1;
 
@@ -32,19 +33,15 @@ export class CartService {
       cart.push(productDetails);
     }
 
-    const d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
-    const expires = + d.toUTCString();
-
-    document.cookie = `cart = ${JSON.stringify(cart)};expires=${expires};path=/`;
+    setCookie('cart', JSON.stringify(cart), 30);
   }
 
   getCartProducts(): string {
-    return this.authService.getCookie('cart');
+    return getCookie('cart');
   }
 
   changeQuantityOfProduct(quantity: string, productDetails: ICartProduct): void {
-    const cart = JSON.parse(this.authService.getCookie('cart'));
+    const cart = JSON.parse(getCookie('cart'));
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].merchName === productDetails.merchName
@@ -52,20 +49,20 @@ export class CartService {
         && cart[i].size === productDetails.size) {
         cart[i].quantity = quantity;
 
-        document.cookie = `cart = ${JSON.stringify(cart)}`;
+        setCookie("cart", JSON.stringify(cart), 30);
         break;
       }
     }
   }
 
   removeProduct(merchName: string): void {
-    const cart = JSON.parse(this.authService.getCookie('cart'));
+    const cart = JSON.parse(getCookie('cart'));
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].merchName === merchName) {
         cart.splice(i, 1);
 
-        document.cookie = `cart = ${JSON.stringify(cart)}`;
+        setCookie("cart", JSON.stringify(cart), 30);
         break;
       }
     }
