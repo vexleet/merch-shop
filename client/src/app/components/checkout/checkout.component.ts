@@ -3,7 +3,7 @@ import { CartService } from './../../core/services/cart.service';
 import { CheckoutService } from './../../core/services/checkout.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { ICartProduct } from 'src/app/core/models';
+import { ICartProduct, ICreditCard } from 'src/app/core/models';
 import { Router } from '@angular/router';
 
 declare let paypal;
@@ -30,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   paymentForm = this.fb.group({
     cardNumber: [''],
     expDate: [''],
-    securityCode: ['']
+    cvc: ['']
   });
 
   orderID: string;
@@ -80,6 +80,25 @@ export class CheckoutComponent implements OnInit {
       this.renderer.setStyle(this.creditCardElement.nativeElement, "display", "none");
       this.renderer.setStyle(this.paypalElement.nativeElement, "display", "block");
     }
+  }
+
+  makePaymentInStripe() {
+    const creditCard: ICreditCard = {
+      cardNumber: this.paymentForm.get("cardNumber").value,
+      expMonth: this.paymentForm.get("expDate").value.split("/")[0],
+      expYear: this.paymentForm.get("expDate").value.split("/")[1],
+      cvc: this.paymentForm.get("cvc").value,
+    };
+
+    const amount: number = Number((this.cartProducts.reduce((a, b) => a + b["price"] * b["quantity"], 0)).toFixed(2));
+
+    this.checkoutService.chargeOrderStripe(creditCard, amount)
+      .subscribe((res) => {
+        document.cookie = 'cart = []';
+
+        this.toastrService.success('Thank you! Your order has been received.');
+        this.router.navigate(['/']);
+      });
   }
 
 }

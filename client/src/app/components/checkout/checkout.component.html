@@ -25,7 +25,7 @@
       <input formControlName="phone" type="text" placeholder="Phone">
     </form>
 
-    <form [formGroup]="paymentForm" class="payment-form">
+    <form [formGroup]="paymentForm" class="payment-form" (ngSubmit)="makePaymentInStripe()">
       <h3>Payment method</h3>
       <div class="radio">
         <input type="radio" name="payment" value="credit" #credit (click)="changePayment(credit.value)"> Credit card
@@ -42,9 +42,9 @@
         <input formControlName="expDate" type="text" placeholder="Experation Date">
 
         <label for="security-code">Security Code</label>
-        <input formControlName="securityCode" type="text" placeholder="Security Code">
+        <input formControlName="cvc" type="text" placeholder="Security Code">
 
-        <button>Place Order</button>
+        <button type="submit">Place Order</button>
       </div>
 
       <div class="radio">

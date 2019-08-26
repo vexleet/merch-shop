@@ -48,18 +48,21 @@ router.get('/paypal/capture-order/:order_id', async (req, res) => {
     });
 });
 
-router.post('/stripe/create-card', async (req, res) => {
+router.post('/stripe/charge-card', async (req, res) => {
     const reqBody = req.body;
+
+    const creditCard = reqBody["creditCard"];
+    const amount = reqBody["amount"];
 
     await request.post("https://api.stripe.com/v1/tokens", {
         auth: {
             bearer: "pk_test_rCB3b9qzy0A8MHQjChtzZ17X00AtnWS7ZF",
         },
         form: {
-            "card[number]": reqBody["cardNumber"],
-            "card[exp_month]": reqBody["expMonth"],
-            "card[exp_year]": reqBody["expYear"],
-            "card[cvc]": reqBody["cvc"]
+            "card[number]": creditCard["cardNumber"],
+            "card[exp_month]": creditCard["expMonth"],
+            "card[exp_year]": creditCard["expYear"],
+            "card[cvc]": creditCard["cvc"]
         }
     }, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
@@ -69,7 +72,7 @@ router.post('/stripe/create-card', async (req, res) => {
                 bearer: "sk_test_oCdUi6zmTbilVt3yxff5rQtY00bvchtCNn",
             },
             form: {
-                "amount": 24.99 * 100,
+                "amount": amount * 100,
                 "currency": "usd",
                 "source": bodyParsed["id"],
                 "description": "Charge for jenny.rosen@example.com"
