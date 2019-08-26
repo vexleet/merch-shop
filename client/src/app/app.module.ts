@@ -1,5 +1,6 @@
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedModule } from './components/shared/shared.module';
+import { CardModule } from 'ngx-card';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
       closeButton: true,
     }),
     BrowserAnimationsModule,
+    CardModule
   ],
   providers: [
     {

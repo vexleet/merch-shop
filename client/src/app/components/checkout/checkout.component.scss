@@ -39,6 +39,25 @@ form.payment-form {
   }
 
   div.credit-card {
+    .card-container{
+      margin: 2em 0;
+    }
+
+    .names,
+    .card-info{
+      display: flex;
+    }
+
+    .card-info{
+      & div:nth-child(1){
+        margin-right: 10px;
+      }
+
+      & div:nth-child(2){
+        flex-shrink: 70;
+      }
+    }
+
     label {
       margin: 0.5em 0;
       display: block;
@@ -48,6 +67,22 @@ form.payment-form {
       width: 100%;
       display: block;
       padding: 0.5em;
+      margin-bottom: 2em;
+    }
+
+    button {
+      width: 100%;
+      padding: 1em;
+      cursor: pointer;
+      background: #0D19A3;
+      border: none;
+      font-size: 1em;
+      color: #16DB94;
+      transition: all 0.3s ease-in-out;
+  
+      &:hover {
+        background: #08105B;
+      }
     }
   }
 

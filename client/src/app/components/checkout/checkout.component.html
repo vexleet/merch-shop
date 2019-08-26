@@ -25,7 +25,7 @@
       <input formControlName="phone" type="text" placeholder="Phone">
     </form>
 
-    <form [formGroup]="paymentForm" class="payment-form" (ngSubmit)="makePaymentInStripe()">
+    <form [formGroup]="paymentForm" class="payment-form">
       <h3>Payment method</h3>
       <div class="radio">
         <input type="radio" name="payment" value="credit" #credit (click)="changePayment(credit.value)"> Credit card
@@ -35,16 +35,39 @@
       </div>
 
       <div class="credit-card" #creditCard>
-        <label for="card-number">Card Number</label>
-        <input formControlName="cardNumber" type="text" placeholder="Card Number">
+        <div class="card-container"></div>
+        <form card container=".card-container" card-width="400" [messages]="messages" [placeholders]="placeholders"
+          [masks]="masks" formatting="false" debug="true" [formGroup]="paymentForm" (ngSubmit)="makePaymentInStripe()">
 
-        <label for="exp-date">Experation Date</label>
-        <input formControlName="expDate" type="text" placeholder="Experation Date">
+          <label for="number">Card Number</label>
+          <input type="text" name="number" card-number formControlName="cardNumber" />
 
-        <label for="security-code">Security Code</label>
-        <input formControlName="cvc" type="text" placeholder="Security Code">
+          <div class="names">
+            <div>
+              <label for="first-name">First Name</label>
+              <input type="text" name="first-name" card-name formControlName="firstName" />
+            </div>
 
-        <button type="submit">Place Order</button>
+            <div>
+              <label for="last-name">Last Name</label>
+              <input type="text" name="last-name" card-name formControlName="lastName" />
+            </div>
+          </div>
+
+          <div class="card-info">
+            <div>
+              <label for="expiry">Expiration Date</label>
+              <input type="text" name="expiry" card-expiry formControlName="expDate" />
+            </div>
+
+            <div>
+              <label for="cvc">CVC</label>
+              <input type="text" name="cvc" card-cvc formControlName="cvc" />
+            </div>
+          </div>
+
+          <button type="submit">Place Order</button>
+        </form>
       </div>
 
       <div class="radio">

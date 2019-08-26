@@ -62,7 +62,8 @@ router.post('/stripe/charge-card', async (req, res) => {
             "card[number]": creditCard["cardNumber"],
             "card[exp_month]": creditCard["expMonth"],
             "card[exp_year]": creditCard["expYear"],
-            "card[cvc]": creditCard["cvc"]
+            "card[cvc]": creditCard["cvc"],
+            "card[name]": creditCard["name"]
         }
     }, function (error, response, body) {
         const bodyParsed = JSON.parse(body);

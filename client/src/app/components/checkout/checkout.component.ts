@@ -6,7 +6,8 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 import { ICartProduct, ICreditCard } from 'src/app/core/models';
 import { Router } from '@angular/router';
 
-declare let paypal;
+declare let paypal: any;
+declare let setCookie: any;
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +30,8 @@ export class CheckoutComponent implements OnInit {
 
   paymentForm = this.fb.group({
     cardNumber: [''],
+    firstName: [''],
+    lastName: [''],
     expDate: [''],
     cvc: ['']
   });
@@ -53,8 +56,8 @@ export class CheckoutComponent implements OnInit {
         return new Promise(resolve => {
           this.checkoutService.createOrderPaypal(this.cartProducts)
             .subscribe((res) => {
-              this.orderID = res["orderID"];
-              resolve(res["orderID"]);
+              this.orderID = res['orderID'];
+              resolve(res['orderID']);
             });
         });
       },
@@ -62,7 +65,7 @@ export class CheckoutComponent implements OnInit {
       onApprove: async (data, actions) => {
         this.checkoutService.captureOrderPaypal(this.orderID)
           .subscribe((res) => {
-            document.cookie = 'cart = []';
+            setCookie('cart', JSON.stringify([]), 30);
 
             this.toastrService.success('Thank you! Your order has been received.');
             this.router.navigate(['/']);
@@ -73,28 +76,29 @@ export class CheckoutComponent implements OnInit {
 
   changePayment(value: string) {
     if (value === 'credit') {
-      this.renderer.setStyle(this.creditCardElement.nativeElement, "display", "block");
-      this.renderer.setStyle(this.paypalElement.nativeElement, "display", "none");
+      this.renderer.setStyle(this.creditCardElement.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.paypalElement.nativeElement, 'display', 'none');
     }
     else if (value === 'paypal') {
-      this.renderer.setStyle(this.creditCardElement.nativeElement, "display", "none");
-      this.renderer.setStyle(this.paypalElement.nativeElement, "display", "block");
+      this.renderer.setStyle(this.creditCardElement.nativeElement, 'display', 'none');
+      this.renderer.setStyle(this.paypalElement.nativeElement, 'display', 'block');
     }
   }
 
   makePaymentInStripe() {
     const creditCard: ICreditCard = {
-      cardNumber: this.paymentForm.get("cardNumber").value,
-      expMonth: this.paymentForm.get("expDate").value.split("/")[0],
-      expYear: this.paymentForm.get("expDate").value.split("/")[1],
-      cvc: this.paymentForm.get("cvc").value,
+      cardNumber: this.paymentForm.get('cardNumber').value,
+      name: `${this.paymentForm.get('firstName').value} ${this.paymentForm.get('lastName').value}`,
+      expMonth: this.paymentForm.get('expDate').value.split('/')[0],
+      expYear: this.paymentForm.get('expDate').value.split('/')[1],
+      cvc: this.paymentForm.get('cvc').value,
     };
 
-    const amount: number = Number((this.cartProducts.reduce((a, b) => a + b["price"] * b["quantity"], 0)).toFixed(2));
+    const amount: number = Number((this.cartProducts.reduce((a, b) => a + b['price'] * b['quantity'], 0)).toFixed(2));
 
     this.checkoutService.chargeOrderStripe(creditCard, amount)
       .subscribe((res) => {
-        document.cookie = 'cart = []';
+        setCookie('cart', JSON.stringify([]), 30);
 
         this.toastrService.success('Thank you! Your order has been received.');
         this.router.navigate(['/']);
