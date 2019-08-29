@@ -23,9 +23,17 @@ router.post('/paypal/create-order', async (req, res) => {
             }],
         })
     }, function (error, response, body) {
+        if (error) {
+            return res.status(200).json({
+                success: false,
+                message: error['message']
+            });
+        }
+
         const parsedBody = JSON.parse(body);
-        console.log(body);
+
         return res.status(200).json({
+            success: true,
             orderID: parsedBody["id"]
         });
     });
@@ -42,7 +50,14 @@ router.get('/paypal/capture-order/:order_id', async (req, res) => {
             bearer: "A21AAEV354xmZ1AgFb0cofN8h2zLJGcqPXQ4XFil5XETVBZHZMz2Txa6Psnk1YRTvKS9xj0ETweaUrd8wQ12w03dDlrbZdGFg"
         }
     }, function (error, response, body) {
+        if (error) {
+            return res.status(200).json({
+                success: false,
+                message: error['message'],
+            })
+        }
         return res.status(200).json({
+            success: true,
             data: JSON.parse(body)
         });
     });
@@ -68,6 +83,13 @@ router.post('/stripe/charge-card', async (req, res) => {
     }, function (error, response, body) {
         const bodyParsed = JSON.parse(body);
 
+        if (bodyParsed.hasOwnProperty('error')) {
+            return res.status(200).json({
+                success: false,
+                message: 'Something went wrong'
+            });
+        }
+
         request.post("https://api.stripe.com/v1/charges", {
             auth: {
                 bearer: "sk_test_oCdUi6zmTbilVt3yxff5rQtY00bvchtCNn",
@@ -79,12 +101,20 @@ router.post('/stripe/charge-card', async (req, res) => {
                 "description": "Charge for jenny.rosen@example.com"
             }
         }, function (error, response, body) {
+            const bodyParsed = JSON.parse(body);
+
+            if (bodyParsed.hasOwnProperty('error')) {
+                return res.status(200).json({
+                    success: false,
+                    message: error['message'],
+                })
+            }
             return res.status(200).json({
+                success: true,
                 data: JSON.parse(body),
             });
         })
     });
-
 
 });
 

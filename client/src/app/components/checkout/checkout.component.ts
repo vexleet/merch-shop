@@ -100,21 +100,25 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutService.chargeOrderStripe(creditCard, amount)
       .subscribe((res) => {
-        console.log(res);
-        const orderBody: IOrder = { ...this.informationForm.value, items: this.cartProducts };
+        if (res['success']) {
+          const orderBody: IOrder = { ...this.informationForm.value, items: this.cartProducts };
 
-        setCookie('cart', JSON.stringify([]), 30);
+          setCookie('cart', JSON.stringify([]), 30);
 
-        this.orderService.createOrder(orderBody)
-          .subscribe((data) => {
-            if (data['success']) {
-              this.toastrService.success('Thank you! Your order has been received.');
-              this.router.navigate(['/']);
-            }
-            else {
-              this.toastrService.error('Something went wrong.');
-            }
-          });
+          this.orderService.createOrder(orderBody)
+            .subscribe((data) => {
+              if (data['success']) {
+                this.toastrService.success('Thank you! Your order has been received.');
+                this.router.navigate(['/']);
+              }
+              else {
+                this.toastrService.error('Something went wrong.');
+              }
+            });
+        }
+        else {
+          this.toastrService.error(res['message']);
+        }
       });
   }
 
