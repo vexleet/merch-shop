@@ -15,6 +15,6 @@ export class OrderService {
   }
 
   getOrders() {
-    return this.http.get(`${this.baseUrl}/all`);
+    return this.http.get<IOrder[]>(`${this.baseUrl}/all`);
   }
 }

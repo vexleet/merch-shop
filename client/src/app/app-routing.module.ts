@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'orders',
+    loadChildren: './components/order/order.module#OrderModule',
   }
 ];
 
