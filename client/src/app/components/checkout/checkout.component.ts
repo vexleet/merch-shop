@@ -1,10 +1,11 @@
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from './../../core/services/cart.service';
 import { CheckoutService } from './../../core/services/checkout.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { ICartProduct, ICreditCard } from 'src/app/core/models';
+import { ICartProduct, ICreditCard, IOrder } from 'src/app/core/models';
 import { Router } from '@angular/router';
+import { OrderService } from 'src/app/core/services/order.service';
 
 declare let paypal: any;
 declare let setCookie: any;
@@ -19,13 +20,13 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('creditCard', { static: true }) creditCardElement: ElementRef;
 
   informationForm = this.fb.group({
-    fullName: [''],
-    email: [''],
-    adress: [''],
-    country: [''],
-    city: [''],
-    phone: [''],
-    postalCode: [''],
+    fullName: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    adress: ['', [Validators.required]],
+    country: ['', [Validators.required]],
+    city: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    postalCode: ['', [Validators.required]],
   });
 
   paymentForm = this.fb.group({
@@ -46,6 +47,7 @@ export class CheckoutComponent implements OnInit {
     private renderer: Renderer2,
     private checkoutService: CheckoutService,
     private cartService: CartService,
+    private orderService: OrderService,
     private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -98,11 +100,49 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutService.chargeOrderStripe(creditCard, amount)
       .subscribe((res) => {
+        console.log(res);
+        const orderBody: IOrder = { ...this.informationForm.value, items: this.cartProducts };
+
         setCookie('cart', JSON.stringify([]), 30);
 
-        this.toastrService.success('Thank you! Your order has been received.');
-        this.router.navigate(['/']);
+        this.orderService.createOrder(orderBody)
+          .subscribe((data) => {
+            if (data['success']) {
+              this.toastrService.success('Thank you! Your order has been received.');
+              this.router.navigate(['/']);
+            }
+            else {
+              this.toastrService.error('Something went wrong.');
+            }
+          });
       });
   }
 
+  get fullName() {
+    return this.informationForm.get('fullName');
+  }
+
+  get email() {
+    return this.informationForm.get('email');
+  }
+
+  get adress() {
+    return this.informationForm.get('adress');
+  }
+
+  get country() {
+    return this.informationForm.get('country');
+  }
+
+  get city() {
+    return this.informationForm.get('city');
+  }
+
+  get postalCode() {
+    return this.informationForm.get('postalCode');
+  }
+
+  get phone() {
+    return this.informationForm.get('phone');
+  }
 }

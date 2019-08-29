@@ -60,8 +60,8 @@ router.post('/stripe/charge-card', async (req, res) => {
         },
         form: {
             "card[number]": creditCard["cardNumber"],
-            "card[exp_month]": creditCard["expMonth"],
-            "card[exp_year]": creditCard["expYear"],
+            "card[exp_month]": Number(creditCard["expMonth"]),
+            "card[exp_year]": Number(creditCard["expYear"]),
             "card[cvc]": creditCard["cvc"],
             "card[name]": creditCard["name"]
         }

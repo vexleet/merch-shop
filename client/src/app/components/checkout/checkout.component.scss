@@ -18,6 +18,13 @@ form.information-form {
     display: block;
     padding: 0.5em;
   }
+
+  .error {
+    color: red;
+    text-align: left;
+    padding: 0;
+    padding-top: 0.5em;
+  }
 }
 
 form.payment-form {
@@ -84,6 +91,7 @@ form.payment-form {
         background: #08105B;
       }
     }
+    
   }
 
   .credit-card,

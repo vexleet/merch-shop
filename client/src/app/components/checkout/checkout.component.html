@@ -5,24 +5,32 @@
       <h3>Billing Details</h3>
       <label for="full-name">First & last name</label>
       <input formControlName="fullName" type="text" placeholder="First & last name">
+      <p class="error" *ngIf="fullName.invalid && fullName.dirty">This field is required.</p>
 
       <label for="email">Email adress</label>
       <input formControlName="email" type="email" placeholder="Email adress">
+      <p class="error" *ngIf="email.invalid && email.dirty">This field is required.</p>
 
       <label for="adress">Adress</label>
       <input formControlName="adress" type="text" placeholder="Adress">
+      <p class="error" *ngIf="adress.invalid && adress.dirty">This field is required.</p>
 
       <label for="country">Country</label>
       <input formControlName="country" type="text" placeholder="Country">
+      <p class="error" *ngIf="country.invalid && country.dirty">This field is required.</p>
 
       <label for="city">City</label>
       <input formControlName="city" type="text" placeholder="City">
+      <p class="error" *ngIf="city.invalid && city.dirty">This field is required.</p>
 
       <label for="postal-code">Postal Code</label>
       <input formControlName="postalCode" type="text" placeholder="Postal Code">
+      <p class="error" *ngIf="postalCode.invalid && postalCode.dirty">This field is required.</p>
 
       <label for="phone">Phone</label>
       <input formControlName="phone" type="text" placeholder="Phone">
+      <p class="error" *ngIf="phone.invalid && phone.dirty">This field is required.</p>
+
     </form>
 
     <form [formGroup]="paymentForm" class="payment-form">
@@ -66,7 +74,7 @@
             </div>
           </div>
 
-          <button type="submit">Place Order</button>
+          <button type="submit" [disabled]="informationForm.invalid">Place Order</button>
         </form>
       </div>
 

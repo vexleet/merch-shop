@@ -26,8 +26,6 @@ router.get('/all', authCheck, (req, res) => {
     if (req.user.roles.indexOf('Admin') > -1) {
         Order.find({ approved: false })
             .then((data) => {
-                console.log(data);
-
                 return res.status(200).json({
                     success: true,
                     data
