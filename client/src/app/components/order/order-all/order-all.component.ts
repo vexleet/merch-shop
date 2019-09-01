@@ -14,7 +14,7 @@ export class OrderAllComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.orders = this.route.snapshot.data['orders'];
+    this.orders = this.route.snapshot.data['orders']['data'];
   }
 
 }

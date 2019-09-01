@@ -9,4 +9,6 @@ export interface IOrder {
     postalCode: string;
     phone: string;
     items: Array<ICartProduct>;
+    orderDate: string;
+    status: string;
 }

@@ -11,6 +11,8 @@ const orderSchema = new Schema({
     phone: { type: String, required: true },
     approved: { type: Boolean, required: true, default: false },
     items: { type: Array, required: true },
+    orderDate: { type: Date, required: true, default: Date.now() },
+    status: { type: String, required: true, default: 'Pending' }
 });
 
 const Order = mongoose.model('Order', orderSchema);

@@ -1,0 +1,27 @@
+h1{
+    text-align: center;
+    margin: 2em 0;
+}
+
+table{
+    width: 60%;
+    margin: 2em auto;
+
+    td{
+        padding: 0.5em;
+    }
+
+    thead{
+        tr{
+            background: #08105B;
+            color: #fff;
+        }
+    }
+
+    tbody{
+        tr{
+            background: #0D19A3;
+            color: #fff;
+        }
+    }
+}
