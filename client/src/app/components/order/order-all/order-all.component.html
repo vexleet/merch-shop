@@ -17,7 +17,7 @@
             <td>${{order.items | sumPrices: 'price'}}</td>
             <td>{{order.status}}</td>
             <td>{{order.orderDate | date}}</td>
-            <td><a routerLink="{{order._id}}">View</a></td>
+            <td><a routerLink="/orders/details/{{order._id}}">View</a></td>
         </tr>
     </tbody>
 </table>

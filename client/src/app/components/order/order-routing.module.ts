@@ -1,3 +1,5 @@
+import { FetchOrderDetailsResolver } from './../../core/resolvers/fetch-order-details.resolver';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FetchAllOrderResolver } from './../../core/resolvers/fetch-all-order.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +12,17 @@ const routes: Routes = [
         component: OrderAllComponent,
         resolve: {
             orders: FetchAllOrderResolver,
+        },
+        canActivate: [RoleGuard],
+        data: {
+            expectedRole: 'Admin',
+        },
+    },
+    {
+        path: 'details/:id',
+        component: OrderDetailsComponent,
+        resolve: {
+            order: FetchOrderDetailsResolver,
         },
         canActivate: [RoleGuard],
         data: {

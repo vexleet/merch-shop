@@ -1,6 +1,7 @@
 import { ICartProduct } from './cart-product';
 
 export interface IOrder {
+    _id: string;
     fullName: string;
     email: string;
     adress: string;

@@ -44,4 +44,29 @@ router.get('/all', authCheck, (req, res) => {
     }
 });
 
+router.get('/details/:id', authCheck, (req, res) => {
+    const orderId = req.params.id;
+
+    if (req.user.roles.indexOf('Admin') > -1) {
+        Order.findOne({ _id: orderId })
+            .then((data) => {
+                return res.status(200).json({
+                    success: true,
+                    data,
+                })
+            })
+            .catch((error) => {
+                return res.status(200).json({
+                    success: false,
+                    message: 'Something went wrong!',
+                })
+            })
+    }
+    else {
+        return res.json({
+            success: false,
+        });
+    }
+});
+
 module.exports = router;

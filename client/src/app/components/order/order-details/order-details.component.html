@@ -1,0 +1,31 @@
+<div class="order-details">
+
+    <div class="cart-details">
+        <ul>
+            <li *ngFor="let product of order.items">
+                <img src="{{product.merchImage}}" alt="">
+                <div>
+                    <h5> {{product.merchName}} x{{product.quantity}}</h5>
+                    <p>{{product.color | uppercase}}/{{product.size | uppercase}}</p>
+                </div>
+            </li>
+        </ul>
+
+        <h4>Total: ${{order.items | sumPrices:'price'}}</h4>
+    </div>
+
+    <div class="billing-details">
+        <h4>Name: {{order.fullName}}</h4>
+        <p>Living place: {{order.city}}/{{order.country}}</p>
+
+        <p>Adress: {{order.adress}}, {{order.postalCode}}</p>
+
+        <h5>Phone: {{order.phone}}</h5>
+        <h5>Email: {{order.email}}</h5>
+    </div>
+
+</div>
+
+<div class="approve">
+    <button>Approve</button>
+</div>
