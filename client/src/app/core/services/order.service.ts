@@ -21,4 +21,8 @@ export class OrderService {
   getDetailsOfOrder(orderId: string) {
     return this.http.get<IOrder>(`${this.baseUrl}/details/${orderId}`);
   }
+
+  approveOrder(orderId: string) {
+    return this.http.put(`${this.baseUrl}/approve/${orderId}`, {});
+  }
 }
