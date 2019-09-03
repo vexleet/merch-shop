@@ -42,6 +42,6 @@ $ nodemon index
 - [Stripe](https://stripe.com) - Checkout with credit cards
 - [SendGrid](https://sendgrid.com) - Used for sending emails
 
-### License
+## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
