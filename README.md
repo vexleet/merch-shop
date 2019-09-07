@@ -15,6 +15,26 @@ Things you need to install and run the project:
 2. [Angular](https://angular.io)
 3. [MongoDB](https://www.mongodb.com)
 
+### Setup Environment Variables to Manage Your API Key
+
+- Windows
+1. Run CMD as administrator
+
+```cmd
+setx SENDGRID_API_KEY "YOUR_API_KEY"
+setx PAYPAL_API_KEY "YOUR_API_KEY"
+setx STRIPE_API_KEY "YOUR_API_KEY"
+```
+
+- Unix systems
+1. Open terminal
+
+```shell
+export SENDGRID_API_KEY='YOUR_API_KEY'
+export PAYPAL_API_KEY='YOUR_API_KEY'
+export STRIPE_API_KEY='YOUR_API_KEY'
+```
+
 ### Setup
 
 Follow these instructions to run the site on your local machine.
