@@ -5,13 +5,14 @@ const router = new express.Router();
 
 router.post('/paypal/create-order', async (req, res) => {
     const reqBody = req.body;
+    const paypalKey = process.env.PAYPAL_API_KEY;
 
     await request.post("https://api.sandbox.paypal.com/v2/checkout/orders", {
         headers: {
             "Content-Type": "application/json",
         },
         auth: {
-            bearer: "A21AAEV354xmZ1AgFb0cofN8h2zLJGcqPXQ4XFil5XETVBZHZMz2Txa6Psnk1YRTvKS9xj0ETweaUrd8wQ12w03dDlrbZdGFg"
+            bearer: paypalKey
         },
         body: JSON.stringify({
             "intent": "CAPTURE",
@@ -41,13 +42,14 @@ router.post('/paypal/create-order', async (req, res) => {
 
 router.get('/paypal/capture-order/:order_id', async (req, res) => {
     const orderID = req.params.order_id;
+    const paypalKey = process.env.PAYPAL_API_KEY;
 
     await request.post(`https://api.sandbox.paypal.com/v2/checkout/orders/${orderID}/capture`, {
         headers: {
             "Content-Type": "application/json",
         },
         auth: {
-            bearer: "A21AAEV354xmZ1AgFb0cofN8h2zLJGcqPXQ4XFil5XETVBZHZMz2Txa6Psnk1YRTvKS9xj0ETweaUrd8wQ12w03dDlrbZdGFg"
+            bearer: paypalKey
         }
     }, function (error, response, body) {
         if (error) {
@@ -65,13 +67,14 @@ router.get('/paypal/capture-order/:order_id', async (req, res) => {
 
 router.post('/stripe/charge-card', async (req, res) => {
     const reqBody = req.body;
-
+    const stripeKey = process.env.STRIPE_API_KEY;
+    
     const creditCard = reqBody["creditCard"];
     const amount = reqBody["amount"];
 
     await request.post("https://api.stripe.com/v1/tokens", {
         auth: {
-            bearer: "pk_test_rCB3b9qzy0A8MHQjChtzZ17X00AtnWS7ZF",
+            bearer: stripeKey,
         },
         form: {
             "card[number]": creditCard["cardNumber"],
@@ -92,7 +95,7 @@ router.post('/stripe/charge-card', async (req, res) => {
 
         request.post("https://api.stripe.com/v1/charges", {
             auth: {
-                bearer: "sk_test_oCdUi6zmTbilVt3yxff5rQtY00bvchtCNn",
+                bearer: stripeKey,
             },
             form: {
                 "amount": amount * 100,
